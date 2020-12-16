@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3913825104556552613}
   - component: {fileID: 2552176645671427304}
   m_Layer: 2
-  m_Name: P_PlayerCharacter
+  m_Name: P_PlayerCharacter_HUB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,15 +96,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f8a59b96d9caff4f86a4aef5020139a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationTime: 0
-  moveSpeed: 0
-  gravity: 0
-  airControl: 0
-  jumpHeight: 0
-  jumpDuration: 0
+  accelerationTime: 1
+  moveSpeed: 6
+  gravity: 3.25
+  airControl: 0.9
+  jumpHeight: 1
+  jumpDuration: 0.25
   floorLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!61 &3913825104556552613
 BoxCollider2D:
   m_ObjectHideFlags: 0
