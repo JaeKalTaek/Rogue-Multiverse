@@ -4,9 +4,11 @@ public class SC_GameManager : MonoBehaviour {
 
     public Transform playerSpawnPoint;
 
+    public GameObject playerPrefab;
+
     void Start() {
 
-        Instantiate (Resources.Load ("Prefabs/Characters/P_PlayerCharacter"), playerSpawnPoint.position, Quaternion.identity);
+        Instantiate (playerPrefab, playerSpawnPoint.position, Quaternion.identity);
         
     }
 

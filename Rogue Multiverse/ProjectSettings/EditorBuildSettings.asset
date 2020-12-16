@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HUB.unity
     guid: 09048b6c283b3524686694e07df86b6a
+  - enabled: 1
+    path: Assets/Scenes/ChaseLevel1.unity
+    guid: 7618174230f120e49bb19b11fffe5733
   m_configObjects: {}
