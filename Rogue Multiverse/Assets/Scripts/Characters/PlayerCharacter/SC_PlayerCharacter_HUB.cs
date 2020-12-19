@@ -7,8 +7,6 @@ public class SC_PlayerCharacter_HUB : SC_BasePlayerCharacter {
     public float airControl;
     public float jumpHeight, jumpDuration;
 
-    public LayerMask floorLayerMask;
-
     float jumpStart, jumpTime;
 
     protected override void Start () {
@@ -21,7 +19,7 @@ public class SC_PlayerCharacter_HUB : SC_BasePlayerCharacter {
 
     protected override void AdditionalMovement () {        
 
-        bool grounded = Physics2D.Raycast (transform.position, Vector2.down, .57f, floorLayerMask);
+        bool grounded = Physics2D.Raycast (transform.position, Vector2.down, .57f, LayerMask.GetMask ("Floor"));
 
         movement *= (grounded || (jumpTime >= 0) ? 1 : airControl);
 

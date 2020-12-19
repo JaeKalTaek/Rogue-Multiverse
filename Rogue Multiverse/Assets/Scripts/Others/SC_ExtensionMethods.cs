@@ -14,4 +14,10 @@ public static class SC_ExtensionMethods {
 
     }
 
+    public static Vector3 Copy (this Vector3 v, float? x, float? y, float? z) {
+
+        return new Vector3 (x ?? v.x, y ?? v.y, z ?? v.z);
+
+    }
+
 }
