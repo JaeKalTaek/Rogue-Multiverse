@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static SC_GameManager;
 
 public class SC_PlayerCharacter_Chase_Roofs : SC_BasePlayerCharacter {
 
@@ -10,52 +11,26 @@ public class SC_PlayerCharacter_Chase_Roofs : SC_BasePlayerCharacter {
 
     protected bool jumping;    
 
-    protected float secondAcceleration;
-
-    protected float height;
-
-    protected Collider2D movementCollider;
-
-    protected override void Start () {
-
-        base.Start ();
-
-        movementCollider = transform.GetChild (0).GetComponent<Collider2D> ();
-
-    }
+    protected float verticalAcceleration;
 
     protected override void AdditionalMovement () {
 
-        secondAcceleration += Mathf.Clamp (secondAcceleration += Time.fixedDeltaTime * (Input.GetAxis ("Vertical") != 0 ? 1 : -1), 0, accelerationTime);
+        verticalAcceleration += Mathf.Clamp (verticalAcceleration += Time.deltaTime * (Input.GetAxis ("Vertical") != 0 ? 1 : -1), 0, accelerationTime);
 
-        Vector2 movement = Vector2.up * Input.GetAxis ("Vertical") * Mathf.Lerp (0, moveSpeed, secondAcceleration / accelerationTime) * Time.fixedDeltaTime;
+        Move (Vector2.up * Input.GetAxis ("Vertical") * Mathf.Lerp (0, moveSpeed, verticalAcceleration / accelerationTime) * Time.deltaTime);
 
-        /*ContactFilter2D filter = new ContactFilter2D ().NoFilter ();
-        filter.SetLayerMask (LayerMask.GetMask ("Floor"));
+        if (!Physics2D.OverlapBox (transform.position, Vector2.one, 0, LayerMask.GetMask ("Ignore Raycast"))) {
 
-        Collider2D[] array = new Collider2D[1];
+            transform.position += Vector3.forward * gravity * Time.deltaTime;            
 
-        movementCollider.transform.localPosition = movement;
+            if (transform.position.z >= deathHeight) {
 
-        movementCollider.OverlapCollider (filter, array);
+                transform.position = GM.playerSpawnPoint.position;
 
-        if (array[0]?.transform.position.z < transform.position.z) {*/
+                transform.localScale = Vector3.one;
 
-        RaycastHit2D t = Physics2D.BoxCast (transform.position, Vector2.one, 0, movement, movement.magnitude, LayerMask.GetMask ("Floor"));
-
-        if (t.collider?.transform.position.z < transform.position.z) {
-
-            //Debug.DrawLine (transform.position, t.point, Color.red, 100f);
-
-            //Debug.DrawRay (t.point, -movement, Color.red, 100f);
-
-            /*RaycastHit2D target = Physics2D.Raycast (transform.position, movement, movement.magnitude, LayerMask.GetMask ("Floor"));
-
-            Debug.DrawRay (target.point, -movement, Color.red, 100f);
-
-            movement = movement.normalized * t.distance;       */
-
-            movement = Vector2.zero;
+            } else
+                transform.localScale = Vector3.one * Mathf.Lerp (1, minSpriteSize, Mathf.InverseLerp (0, deathHeight, transform.position.z));
 
         }
 
@@ -73,7 +48,7 @@ public class SC_PlayerCharacter_Chase_Roofs : SC_BasePlayerCharacter {
 
         }
 
-        transform.localScale = Vector3.one * Mathf.Lerp (1, minSpriteSize, Mathf.InverseLerp (0, deathHeight, height));*/
+        */
 
     }
 
