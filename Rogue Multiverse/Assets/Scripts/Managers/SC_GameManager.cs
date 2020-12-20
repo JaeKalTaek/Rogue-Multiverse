@@ -10,18 +10,21 @@ public class SC_GameManager : MonoBehaviour {
 
     public GameObject playerPrefab;
 
-    public int lives;
+    public int baseLives;
+    int lives;
 
     public TextMeshProUGUI livesText;
 
     protected virtual void Start() {
+
+        lives = baseLives;
 
         GM = this;
 
         Instantiate (playerPrefab, playerSpawnPoint.position, Quaternion.identity);
 
         if (lives > 0)
-            livesText.text = "Lives: " + lives;
+            livesText.text = "Lives: " + baseLives;
         
     }
 

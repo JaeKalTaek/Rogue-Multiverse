@@ -1219,7 +1219,7 @@ MonoBehaviour:
   playerSpawnPoint: {fileID: 1720910788}
   playerPrefab: {fileID: 1527618563215064362, guid: 468fd4e577aedd0448cce5b5d0554abb,
     type: 3}
-  lives: 2
+  baseLives: 2
   livesText: {fileID: 407712695}
 --- !u!4 &1165447764
 Transform:
