@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accelerationTime: 1
   moveSpeed: 6
-  gravity: 1
+  gravity: 4
   jumpCurve:
     serializedVersion: 2
     m_Curve:
@@ -110,17 +110,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.125
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
       time: 0.25
-      value: 0
+      value: 2
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -131,4 +122,4 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   deathHeight: 3
-  minSpriteSize: 0.5
+  spriteSizePerUnit: 0.1

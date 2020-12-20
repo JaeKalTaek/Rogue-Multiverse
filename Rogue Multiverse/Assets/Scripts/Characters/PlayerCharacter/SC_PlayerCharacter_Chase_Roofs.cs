@@ -7,11 +7,20 @@ public class SC_PlayerCharacter_Chase_Roofs : SC_BasePlayerCharacter {
 
     public AnimationCurve jumpCurve;
 
-    public float deathHeight, minSpriteSize;
+    public float deathHeight, spriteSizePerUnit;
 
-    protected bool jumping;    
+    protected float jumpTime;
+    float? jumpStart;
 
     protected float verticalAcceleration;
+
+    protected override void Start () {
+
+        base.Start ();
+
+        jumpStart = null;
+
+    }
 
     protected override void AdditionalMovement () {
 
@@ -19,9 +28,11 @@ public class SC_PlayerCharacter_Chase_Roofs : SC_BasePlayerCharacter {
 
         Move (Vector2.up * Input.GetAxis ("Vertical") * Mathf.Lerp (0, moveSpeed, verticalAcceleration / accelerationTime) * Time.deltaTime);
 
-        if (!Physics2D.OverlapBox (transform.position, Vector2.one, 0, LayerMask.GetMask ("Ignore Raycast"))) {
+        Collider2D under = Physics2D.OverlapBox (transform.position, Vector2.one, 0, LayerMask.GetMask ("Ignore Raycast"));
 
-            transform.position += Vector3.forward * gravity * Time.deltaTime;            
+        if (!under || under.transform.position.z > transform.position.z) {
+
+            transform.position = transform.position.Copy (null, null, Mathf.Min (under?.transform.position.z ?? deathHeight, transform.position.z + gravity * Time.deltaTime));
 
             if (transform.position.z >= deathHeight) {
 
@@ -29,26 +40,28 @@ public class SC_PlayerCharacter_Chase_Roofs : SC_BasePlayerCharacter {
 
                 transform.localScale = Vector3.one;
 
-            } else
-                transform.localScale = Vector3.one * Mathf.Lerp (1, minSpriteSize, Mathf.InverseLerp (0, deathHeight, transform.position.z));
-
-        }
-
-        /*if (array[0]) {
-
-            if (Input.GetButtonDown ("Jump") && !jumping) {
-
-
-
             }
 
-        } else {
+        } else if (Input.GetButtonDown ("Jump") && jumpStart == null) {
 
-            height = Mathf.Max (deathHeight, height - gravity * Time.fixedDeltaTime);
+            jumpTime = 0;
+
+            jumpStart = transform.position.z;
 
         }
 
-        */
+        if (jumpStart != null) {
+
+            jumpTime = Mathf.Min (jumpTime + Time.deltaTime, jumpCurve.Length ());
+
+            transform.position = transform.position.Copy (null, null, jumpStart - jumpCurve.Evaluate (jumpTime));
+
+            if (jumpTime >= jumpCurve.Length ())
+                jumpStart = null;
+
+        }
+
+        transform.localScale = Vector3.one - Vector3.one * spriteSizePerUnit * transform.position.z;
 
     }
 

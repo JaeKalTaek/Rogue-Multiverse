@@ -20,4 +20,10 @@ public static class SC_ExtensionMethods {
 
     }
 
+    public static float Length (this AnimationCurve a) {
+
+        return a.keys[a.length - 1].time;
+
+    }
+
 }
