@@ -16,8 +16,9 @@ public class SC_GM_ChaseRoofLevel : SC_GameManager {
 
     void Update() {
         
-        foreach (SC_ChaseRoofBuilding roof in roofs)
-            roof.transform.GetChild (0).gameObject.layer = LayerMask.NameToLayer (roof.transform.position.z < Player.transform.position.z ? "Default" : "Ignore Raycast");
+        if (Player)
+            foreach (SC_ChaseRoofBuilding roof in roofs)
+                roof.transform.GetChild (0).gameObject.layer = LayerMask.NameToLayer (roof.transform.position.z < Player.transform.position.z ? "Default" : "Ignore Raycast");
 
     }
 

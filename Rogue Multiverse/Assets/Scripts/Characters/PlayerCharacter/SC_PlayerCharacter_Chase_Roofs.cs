@@ -34,7 +34,7 @@ public class SC_PlayerCharacter_Chase_Roofs : SC_BasePlayerCharacter {
 
             transform.position = transform.position.Copy (null, null, Mathf.Min (under?.transform.position.z ?? deathHeight, transform.position.z + gravity * Time.deltaTime));
 
-            if (transform.position.z >= deathHeight) {
+            if (transform.position.z >= deathHeight && !GM.Fail ()) {
 
                 transform.position = GM.playerSpawnPoint.position;
 
