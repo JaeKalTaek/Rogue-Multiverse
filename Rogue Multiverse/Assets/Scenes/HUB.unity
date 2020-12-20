@@ -272,7 +272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 220917737}
   - component: {fileID: 220917738}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: TrophyCase (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 367134612}
   - component: {fileID: 367134614}
   - component: {fileID: 367134613}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1060,7 +1060,7 @@ GameObject:
   - component: {fileID: 710129455}
   - component: {fileID: 710129457}
   - component: {fileID: 710129456}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: Teleporter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1862,7 +1862,7 @@ GameObject:
   - component: {fileID: 1082317011}
   - component: {fileID: 1082317013}
   - component: {fileID: 1082317012}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2223,7 +2223,7 @@ GameObject:
   - component: {fileID: 1251679829}
   - component: {fileID: 1251679831}
   - component: {fileID: 1251679830}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2330,7 +2330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1283391685}
   - component: {fileID: 1283391686}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: TrophyCase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2411,7 +2411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1386947402}
   - component: {fileID: 1386947403}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: TrophyCase (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2650,7 +2650,7 @@ GameObject:
   - component: {fileID: 1699126162}
   - component: {fileID: 1699126161}
   - component: {fileID: 1699126163}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: MultiversalConsole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2833,7 +2833,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2050757746}
   - component: {fileID: 2050757747}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: TrophyCase (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 4351579932842007237}
   - component: {fileID: 8010837244575500744}
   - component: {fileID: 9183873638350033779}
-  - component: {fileID: 3913825104556552613}
-  - component: {fileID: 2552176645671427304}
   m_Layer: 2
   m_Name: P_PlayerCharacter_HUB
   m_TagString: Untagged
@@ -98,57 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accelerationTime: 1
   moveSpeed: 6
-  gravity: 3.25
+  gravity: 4
   airControl: 0.9
   jumpHeight: 1
-  jumpDuration: 0.25
-  floorLayerMask:
-    serializedVersion: 2
-    m_Bits: 256
---- !u!61 &3913825104556552613
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 700681686349156771}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!50 &2552176645671427304
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 700681686349156771}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: 44a3c46cfc8cc2942af67b7df1d330a7, type: 2}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
+  jumpDuration: 0.15

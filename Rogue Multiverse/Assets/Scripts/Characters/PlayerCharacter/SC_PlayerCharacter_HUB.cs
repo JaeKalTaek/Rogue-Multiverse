@@ -17,16 +17,16 @@ public class SC_PlayerCharacter_HUB : SC_BasePlayerCharacter {
 
     }
 
+    protected override Vector2 BaseMovement => base.BaseMovement * (Grounded || (jumpTime >= 0) ? 1 : airControl);
+
     protected override void AdditionalMovement () {        
 
-        bool grounded = Physics2D.Raycast (transform.position, Vector2.down, .57f, LayerMask.GetMask ("Floor"));
-
-        movement *= (grounded || (jumpTime >= 0) ? 1 : airControl);
+        Vector2 movement = Vector2.zero;
 
         if (jumpTime < 0) {
 
-            if (!grounded)
-                movement += Vector2.down * gravity * Time.fixedDeltaTime;
+            if (!Grounded)
+                movement += Vector2.down * gravity * Time.deltaTime;
             else if (Input.GetAxisRaw ("Vertical") > 0) {
 
                 jumpTime = 0;
@@ -39,7 +39,7 @@ public class SC_PlayerCharacter_HUB : SC_BasePlayerCharacter {
 
         if (jumpTime >= 0) {
 
-            jumpTime += Time.fixedDeltaTime;
+            jumpTime += Time.deltaTime;
 
             float lerp = jumpTime / jumpDuration;
 
@@ -47,14 +47,12 @@ public class SC_PlayerCharacter_HUB : SC_BasePlayerCharacter {
 
             jumpTime = (lerp >= 1) || (Input.GetAxis ("Vertical") <= 0) ? -1 : jumpTime;
 
-        }        
+        }
 
-        RaycastHit2D target = Physics2D.Raycast (transform.position, movement, movement.magnitude + .5f);
-
-        if (target.collider)
+        if (Move (movement))
             jumpTime = -1;
 
-    }    
+    }
 
 }
 

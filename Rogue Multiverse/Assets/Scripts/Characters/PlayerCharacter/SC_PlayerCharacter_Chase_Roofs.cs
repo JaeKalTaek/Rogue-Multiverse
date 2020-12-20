@@ -28,7 +28,7 @@ public class SC_PlayerCharacter_Chase_Roofs : SC_BasePlayerCharacter {
 
         secondAcceleration += Mathf.Clamp (secondAcceleration += Time.fixedDeltaTime * (Input.GetAxis ("Vertical") != 0 ? 1 : -1), 0, accelerationTime);
 
-        movement += Vector2.up * Input.GetAxis ("Vertical") * Mathf.Lerp (0, moveSpeed, secondAcceleration / accelerationTime) * Time.fixedDeltaTime;
+        Vector2 movement = Vector2.up * Input.GetAxis ("Vertical") * Mathf.Lerp (0, moveSpeed, secondAcceleration / accelerationTime) * Time.fixedDeltaTime;
 
         /*ContactFilter2D filter = new ContactFilter2D ().NoFilter ();
         filter.SetLayerMask (LayerMask.GetMask ("Floor"));
