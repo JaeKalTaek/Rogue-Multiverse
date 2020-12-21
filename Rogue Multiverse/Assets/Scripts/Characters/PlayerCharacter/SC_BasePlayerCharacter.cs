@@ -43,7 +43,7 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
         if (movement != Vector2.zero) {
 
-            RaycastHit2D t = Physics2D.BoxCast (transform.position, Vector2.one, 0, movement, movement.magnitude, LayerMask.GetMask ("Default"));
+            RaycastHit2D t = Physics2D.BoxCast (transform.position, transform.lossyScale, 0, movement, movement.magnitude, LayerMask.GetMask ("Default"));
 
             if (!t.collider)
                 transform.position += movement.V3 ();

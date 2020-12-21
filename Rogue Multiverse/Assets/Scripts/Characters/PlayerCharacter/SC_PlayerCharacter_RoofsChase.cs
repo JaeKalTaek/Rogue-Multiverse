@@ -14,7 +14,11 @@ public class SC_PlayerCharacter_RoofsChase : SC_BasePlayerCharacter {
 
     protected float verticalAcceleration;
 
+    Vector3 baseScale;
+
     protected override void Start () {
+
+        baseScale = transform.lossyScale;
 
         base.Start ();
 
@@ -34,13 +38,8 @@ public class SC_PlayerCharacter_RoofsChase : SC_BasePlayerCharacter {
 
             transform.position = transform.position.Copy (null, null, Mathf.Min (under?.transform.position.z ?? deathHeight, transform.position.z + gravity * Time.deltaTime));
 
-            if (transform.position.z >= deathHeight && !GM.Fail ()) {
-
+            if (transform.position.z >= deathHeight && !GM.Fail ())
                 transform.position = GM.playerSpawnPoint.position;
-
-                transform.localScale = Vector3.one;
-
-            }
 
         } else if (Input.GetButtonDown ("Jump") && jumpStart == null) {
 
@@ -61,7 +60,7 @@ public class SC_PlayerCharacter_RoofsChase : SC_BasePlayerCharacter {
 
         }
 
-        transform.localScale = Vector3.one - Vector3.one * spriteSizePerUnit * transform.position.z;
+        transform.localScale = baseScale - Vector3.one * spriteSizePerUnit * transform.position.z;
 
     }
 
