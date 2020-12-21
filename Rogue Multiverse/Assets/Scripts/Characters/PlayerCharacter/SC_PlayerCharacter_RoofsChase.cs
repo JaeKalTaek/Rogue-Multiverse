@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using static SC_GameManager;
 
-public class SC_PlayerCharacter_Chase_Roofs : SC_BasePlayerCharacter {
+public class SC_PlayerCharacter_RoofsChase : SC_BasePlayerCharacter {
 
     public float gravity;
 

@@ -32,7 +32,7 @@ public class SC_Teleporter : SC_InteractableElement {
 
     public void Teleport () {
 
-        SceneManager.LoadScene ("ChaseLevel1");
+        SceneManager.LoadScene ("RoofsChase1");
 
     }
 

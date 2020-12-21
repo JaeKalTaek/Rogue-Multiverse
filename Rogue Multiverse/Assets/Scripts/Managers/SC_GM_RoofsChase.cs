@@ -2,22 +2,22 @@
 using UnityEngine;
 using static SC_BasePlayerCharacter;
 
-public class SC_GM_ChaseRoofLevel : SC_GameManager {
+public class SC_GM_RoofsChase : SC_GameManager {
 
-    List<SC_ChaseRoofBuilding> roofs;
+    List<SC_RoofsChase_Roof> roofs;
 
     protected override void Start() {
 
         base.Start ();
 
-        roofs = new List<SC_ChaseRoofBuilding> (FindObjectsOfType<SC_ChaseRoofBuilding> ());
+        roofs = new List<SC_RoofsChase_Roof> (FindObjectsOfType<SC_RoofsChase_Roof> ());
 
     }
 
     void Update() {
         
         if (Player)
-            foreach (SC_ChaseRoofBuilding roof in roofs)
+            foreach (SC_RoofsChase_Roof roof in roofs)
                 roof.transform.GetChild (0).gameObject.layer = LayerMask.NameToLayer (roof.transform.position.z < Player.transform.position.z ? "Default" : "Ignore Raycast");
 
     }

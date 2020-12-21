@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-public class SC_ChaseRoofBuilding : MonoBehaviour {
+public class SC_RoofsChase_Roof : MonoBehaviour {
 
     public Vector2 Size;
 
