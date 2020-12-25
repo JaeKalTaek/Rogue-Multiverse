@@ -1,6 +1,8 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static SC_BasePlayerCharacter;
 
 public class SC_GameManager : MonoBehaviour {
 
@@ -15,16 +17,38 @@ public class SC_GameManager : MonoBehaviour {
 
     public TextMeshProUGUI livesText;
 
+    public GameObject tutorial;
+
     protected virtual void Start() {
 
         lives = baseLives;
 
         GM = this;
 
-        Instantiate (playerPrefab, playerSpawnPoint.position, Quaternion.identity);
+        SC_PlayerCharacter_RoofsChase p = Instantiate (playerPrefab, playerSpawnPoint.position, Quaternion.identity).GetComponent <SC_PlayerCharacter_RoofsChase> ();
+
+        if (tutorial) {
+
+            p.Paused = true;
+
+            tutorial.SetActive(true);
+
+            StartCoroutine(TutorialDuration ());
+
+        }
 
         if (lives > 0)
-            livesText.text = "Lives: " + baseLives;
+            livesText.text = "Lives: " + baseLives;      
+
+    }
+
+    IEnumerator TutorialDuration () {
+
+        yield return new WaitForSeconds(1);
+
+        tutorial.SetActive(false);
+
+        Player.Paused = false;
         
     }
 
