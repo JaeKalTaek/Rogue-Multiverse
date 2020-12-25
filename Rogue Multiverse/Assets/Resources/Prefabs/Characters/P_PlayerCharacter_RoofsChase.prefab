@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   accelerationTime: 1
-  moveSpeed: 6
+  moveSpeed: 4
   gravity: 6
   jumpCurve:
     serializedVersion: 2
