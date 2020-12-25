@@ -32,7 +32,7 @@ public class SC_PlayerCharacter_RoofsChase : SC_BasePlayerCharacter {
 
         Move (Vector2.up * Input.GetAxis ("Vertical") * Mathf.Lerp (0, moveSpeed, verticalAcceleration / accelerationTime) * Time.deltaTime);
 
-        Collider2D under = Physics2D.OverlapBox (transform.position, Vector2.one, 0, LayerMask.GetMask ("Ignore Raycast"));
+        Collider2D under = Physics2D.OverlapBox (transform.position, transform.localScale, 0, LayerMask.GetMask ("Ignore Raycast"));
 
         if (!under || under.transform.position.z > transform.position.z) {
 
