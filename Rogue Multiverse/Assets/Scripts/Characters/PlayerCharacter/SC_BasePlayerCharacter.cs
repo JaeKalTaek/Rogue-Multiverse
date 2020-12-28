@@ -4,49 +4,51 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     public static SC_BasePlayerCharacter Player;
 
-    [Header ("Tweakable")]
+    [Header("Tweakable")]
     public float accelerationTime;
     public float moveSpeed;
 
     protected float horizontalAcceleration;
 
-    protected bool Grounded { get { return Physics2D.Raycast (transform.position, Vector2.down, .57f, LayerMask.GetMask ("Default")); } }
-
-    protected virtual Vector2 BaseMovement { get { return (Vector2.right * Input.GetAxis ("Horizontal") * Mathf.Lerp (0, moveSpeed, horizontalAcceleration / accelerationTime) * Time.deltaTime); } }
+    protected virtual Vector2 BaseMovement { get { return (Vector2.right * Input.GetAxis("Horizontal") * Mathf.Lerp(0, moveSpeed, horizontalAcceleration / accelerationTime) * Time.deltaTime); } }
 
     public bool Paused { get; set; }
 
-    protected virtual void Start () {
+    protected SC_Checkpoint checkpoint;
+
+    protected void Awake() {
 
         Player = this;
 
     }
 
-    protected virtual void Update () {
+    protected virtual void Update() {
 
-        if (Input.GetButtonDown ("Submit") && Grounded)
-            Physics2D.OverlapBox (transform.position, Vector2.one, 0, LayerMask.GetMask ("Interactable"))?.GetComponent<SC_InteractableElement> ().Interact ();
+        if (CanInteract)
+            GetOver<SC_InteractableElement>("Interactable")?.Interact();
 
         if (!Paused) {
 
-            horizontalAcceleration = Mathf.Clamp (horizontalAcceleration += Time.deltaTime * (Input.GetAxis ("Horizontal") != 0 ? 1 : -1), 0, accelerationTime);
+            horizontalAcceleration = Mathf.Clamp(horizontalAcceleration += Time.deltaTime * (Input.GetAxis("Horizontal") != 0 ? 1 : -1), 0, accelerationTime);
 
-            Move (BaseMovement);    
+            Move(BaseMovement);
 
-            AdditionalMovement ();           
+            AdditionalMovement();
 
         }
 
-    }    
+        checkpoint = GetOver<SC_Checkpoint>("Checkpoint") ?? checkpoint;
 
-    protected virtual bool Move (Vector2 movement) {
+    }
+
+    protected virtual bool Move(Vector2 movement) {
 
         if (movement != Vector2.zero) {
 
-            RaycastHit2D t = Physics2D.BoxCast (transform.position, transform.lossyScale, 0, movement, movement.magnitude, LayerMask.GetMask ("Default"));
+            RaycastHit2D t = Physics2D.BoxCast(transform.position, transform.lossyScale, 0, movement, movement.magnitude, LayerMask.GetMask("Default"));
 
             if (!t.collider)
-                transform.position += movement.V3 ();
+                transform.position += movement.V3();
 
             return t.collider;
 
@@ -55,7 +57,15 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     }
 
-    protected abstract void AdditionalMovement ();
+    protected abstract void AdditionalMovement();
+
+    public T GetOver<T>(string id) where T : Behaviour {
+
+        return Physics2D.OverlapBox(transform.position, transform.lossyScale, 0, LayerMask.GetMask(id))?.GetComponent<T>();
+
+    }
+
+    public virtual bool CanInteract { get { return Input.GetButtonDown("Submit"); } }
 
 }
 

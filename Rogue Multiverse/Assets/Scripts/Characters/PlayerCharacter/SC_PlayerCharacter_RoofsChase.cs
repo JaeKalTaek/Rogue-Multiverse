@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using static SC_GameManager;
+using static SC_Camera_Base;
 
 public class SC_PlayerCharacter_RoofsChase : SC_BasePlayerCharacter {
 
@@ -7,53 +8,78 @@ public class SC_PlayerCharacter_RoofsChase : SC_BasePlayerCharacter {
 
     public AnimationCurve jumpCurve;
 
+    [Range(0f, 1f)]
+    public float jumpControl;
+
+    [Range(0f, 1f)]
+    public float fallControl;
+
     public float deathHeight, spriteSizePerUnit;
 
     protected float jumpTime;
-    float? jumpStart;
+    float? jumpStart = null;
 
     protected float verticalAcceleration;
 
     Vector3 baseScale;
 
-    protected override void Start () {
+    float baseCamDistance;
+
+    Collider2D under;
+
+    protected void Start () {
 
         baseScale = transform.lossyScale;
 
-        base.Start ();
-
-        jumpStart = null;
+        baseCamDistance = Vector2.Distance(transform.position, Cam.transform.position);
 
     }
+
+    protected override void Update() {
+
+        under = GetOver<Collider2D>("Ignore Raycast");
+
+        base.Update();
+
+    }
+
+    float AirControl { get { return jumpStart != null ? jumpControl : ((!under || under.transform.position.z > transform.position.z) ? fallControl : 1); } }
+
+    protected override Vector2 BaseMovement => base.BaseMovement * AirControl;
 
     protected override void AdditionalMovement () {
 
         verticalAcceleration += Mathf.Clamp (verticalAcceleration += Time.deltaTime * (Input.GetAxis ("Vertical") != 0 ? 1 : -1), 0, accelerationTime);
 
-        Move (Vector2.up * Input.GetAxis ("Vertical") * Mathf.Lerp (0, moveSpeed, verticalAcceleration / accelerationTime) * Time.deltaTime);
+        Move (Vector2.up * Input.GetAxis ("Vertical") * Mathf.Lerp (0, moveSpeed, verticalAcceleration / accelerationTime) * Time.deltaTime * AirControl);        
 
-        Collider2D under = Physics2D.OverlapBox (transform.position, transform.localScale, 0, LayerMask.GetMask ("Ignore Raycast"));
+        if (jumpStart == null) {
 
-        if (!under || under.transform.position.z > transform.position.z) {
+            if (!under || under.transform.position.z > transform.position.z) {
 
-            transform.position = transform.position.Copy (null, null, Mathf.Min (under?.transform.position.z ?? deathHeight, transform.position.z + gravity * Time.deltaTime));
+                transform.Set(null, null, Mathf.Min(under?.transform.position.z ?? deathHeight, transform.position.z + gravity * Time.deltaTime));
 
-            if (transform.position.z >= deathHeight && !GM.Fail ())
-                transform.position = GM.playerSpawnPoint.position;
+                if (transform.position.z >= deathHeight && !GM.Fail()) {
 
-        } else if (Input.GetButtonDown ("Jump") && jumpStart == null) {
+                    transform.position = checkpoint?.SpawnPos ?? GM.playerSpawnPoint.position;
 
-            jumpTime = 0;
+                    Cam.GetComponent<SC_Camera_RoofsChase>().Respawned(baseCamDistance);
 
-            jumpStart = transform.position.z;
+                }
 
-        }
+            } else if (Input.GetButtonDown("Jump")) {
 
-        if (jumpStart != null) {
+                jumpTime = 0;
+
+                jumpStart = transform.position.z;
+
+            } 
+
+        } else {
 
             jumpTime = Mathf.Min (jumpTime + Time.deltaTime, jumpCurve.Length ());
 
-            transform.position = transform.position.Copy (null, null, jumpStart - jumpCurve.Evaluate (jumpTime));
+            transform.Set (null, null, jumpStart - jumpCurve.Evaluate (jumpTime));
 
             if (jumpTime >= jumpCurve.Length ())
                 jumpStart = null;

@@ -25,7 +25,7 @@ public class SC_RoofsChase_Roof : MonoBehaviour {
 
             prevHeight = height;
 
-            transform.position = transform.position.Copy(null, null, -height);
+            transform.Set(null, null, -height);
 
             GetComponent<SpriteRenderer>().size = size;
 

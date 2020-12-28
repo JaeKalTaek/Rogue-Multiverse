@@ -121,5 +121,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  jumpControl: 0.9
+  fallControl: 0.7
   deathHeight: 3
   spriteSizePerUnit: 0.05

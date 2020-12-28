@@ -7,15 +7,12 @@ public class SC_PlayerCharacter_HUB : SC_BasePlayerCharacter {
     public float airControl;
     public float jumpHeight, jumpDuration;
 
-    float jumpStart, jumpTime;
+    float jumpStart;
+    float jumpTime = -1;
 
-    protected override void Start () {
+    bool Grounded { get { return Physics2D.Raycast(transform.position, Vector2.down, .57f, LayerMask.GetMask("Default")); } }
 
-        base.Start ();
-
-        jumpTime = -1;
-
-    }
+    public override bool CanInteract => base.CanInteract && Grounded;
 
     protected override Vector2 BaseMovement => base.BaseMovement * (Grounded || (jumpTime >= 0) ? 1 : airControl);
 
