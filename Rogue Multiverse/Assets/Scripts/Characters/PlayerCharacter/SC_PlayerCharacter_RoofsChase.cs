@@ -35,9 +35,15 @@ public class SC_PlayerCharacter_RoofsChase : SC_BasePlayerCharacter {
 
     }
 
-    protected override void Update() {
+    protected override void Update() {        
 
         under = GetOver<Collider2D>("Ignore Raycast");
+
+        if (!Paused && GetOver<Collider2D>("Checkpoint")?.name == "End" && AirControl == 1) {
+
+            Paused = true;
+
+        }
 
         base.Update();
 
@@ -88,6 +94,6 @@ public class SC_PlayerCharacter_RoofsChase : SC_BasePlayerCharacter {
 
         transform.localScale = baseScale - Vector3.one * spriteSizePerUnit * transform.position.z;
 
-    }
+    }    
 
 }

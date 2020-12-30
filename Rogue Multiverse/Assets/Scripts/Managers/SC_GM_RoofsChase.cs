@@ -73,6 +73,14 @@ public class SC_GM_RoofsChase : SC_GameManager {
 
         }
 
+        BoxCollider2D end = new GameObject("End").AddComponent<BoxCollider2D>();
+
+        end.transform.position = roofs[roofs.Count - 1].transform.position;
+
+        end.size = roofs[roofs.Count - 1].size / 2;
+
+        end.gameObject.layer = LayerMask.NameToLayer("Checkpoint");
+
         AddRoof(7, new Vector2(19.2f, 5), new Vector3(0, roofs[roofs.Count - 1].transform.position.y + (roofs[roofs.Count - 1].size.y + 5) / 2 + 0.04f + (7 - roofs[roofs.Count - 1].height) * .4f, 0));
 
     }
