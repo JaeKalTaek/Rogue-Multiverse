@@ -3,63 +3,47 @@ using UnityEngine;
 
 public class SC_RoofsChase_Roof : MonoBehaviour {
 
-    Vector2? prevSize;
     public Vector2 size;
 
-    float? prevHeight;
     public float height;
 
     List<SpriteRenderer> floors;
 
-    private void Start() {
+    public void Setup() {
 
-        UpdateVisuals();
+        transform.Set(null, null, -height);
 
-    }
+        GetComponent<SpriteRenderer>().size = size;
 
-    public void UpdateVisuals() {
+        GetComponent<BoxCollider2D>().size = size;
 
-        if (gameObject.scene.IsValid() && prevSize == null || prevSize != size || prevHeight == null || prevHeight != height) {
+        List<SpriteRenderer> f = new List<SpriteRenderer>(GetComponentsInChildren<SpriteRenderer>());
 
-            prevSize = size;
+        f.Remove(GetComponent<SpriteRenderer>());
 
-            prevHeight = height;
+        foreach (SpriteRenderer sr in f)
+            DestroyImmediate(sr.gameObject);
 
-            transform.Set(null, null, -height);
+        for (int i = 0; i < height; i++) {
 
-            GetComponent<SpriteRenderer>().size = size;
+            SpriteRenderer sr = new GameObject().AddComponent<SpriteRenderer>();
 
-            GetComponent<BoxCollider2D>().size = size;
+            sr.transform.parent = transform;
 
-            List<SpriteRenderer> f = new List<SpriteRenderer>(GetComponentsInChildren<SpriteRenderer>());
+            sr.drawMode = SpriteDrawMode.Sliced;
 
-            f.Remove(GetComponent<SpriteRenderer>());
+            sr.sprite = Resources.Load<Sprite>("Sprites/LD/RoofsChase/Building");
 
-            foreach (SpriteRenderer sr in f)
-                DestroyImmediate(sr.gameObject);
+            float w = sr.sprite.bounds.size.x - 1;
 
-            for (int i = 0; i < height; i++) {
+            float h = sr.sprite.bounds.size.y - 1;
 
-                SpriteRenderer sr = new GameObject().AddComponent<SpriteRenderer>();
+            sr.transform.localPosition = new Vector3(w * (i + .5f), h * -(i + .5f), transform.position.y);
 
-                sr.transform.parent = transform;
-
-                sr.drawMode = SpriteDrawMode.Sliced;
-
-                sr.sprite = Resources.Load<Sprite>("Sprites/LD/RoofsChase/Building");
-
-                float w = sr.sprite.bounds.size.x - 1;
-
-                float h = sr.sprite.bounds.size.y - 1;
-
-                sr.transform.localPosition = new Vector3(w * (i + .5f), h * -(i + .5f), 2 * height);
-
-                sr.size = new Vector2(size.x + w, size.y + h);
-
-            }
+            sr.size = new Vector2(size.x + w, size.y + h);
 
         }
 
-    }  
+    }
 
 }
