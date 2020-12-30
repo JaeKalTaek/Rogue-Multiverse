@@ -13,7 +13,7 @@ public class SC_GM_RoofsChase : SC_GameManager {
 
     public Vector2Int xDiffRange, yDiffRange;
 
-    public AnimationCurve maxRoofSize;
+    public AnimationCurve maxRoofSize, xDiff;
 
     public int maxHeight;
 
@@ -32,7 +32,7 @@ public class SC_GM_RoofsChase : SC_GameManager {
 
             Vector2 s = new Vector2(maxRoofSize.Evaluate (Random.value), maxRoofSize.Evaluate(Random.value));
 
-            Vector3 p = roofs[roofs.Count - 1].transform.position + Vector3.right * Random.Range(xDiffRange.x, xDiffRange.y - 1) + Vector3.up * Random.Range (yDiffRange.x, yDiffRange.y - 1);
+            Vector3 p = roofs[roofs.Count - 1].transform.position + Vector3.right * (Random.value >= .5f ? -xDiff.Evaluate(Random.value) : xDiff.Evaluate(Random.value)) + Vector3.up * Random.Range (yDiffRange.x, yDiffRange.y - 1);
 
             p = new Vector3(Mathf.Clamp(p.x, (-Cam.aspect * Cam.orthographicSize) + 1, Cam.aspect * Cam.orthographicSize - 1), p.y, 0);
 
@@ -49,23 +49,15 @@ public class SC_GM_RoofsChase : SC_GameManager {
 
             }
 
-            print(t.distance + h - roofs[roofs.Count - 1].height);
+            //print(p.x - roofs[roofs.Count - 1].transform.position.x);
 
-            SC_RoofsChase_Roof r = Instantiate(Resources.Load<SC_RoofsChase_Roof>("Prefabs/LD/PF_Roof"));
+            //print(t.distance + h - roofs[roofs.Count - 1].height);
 
-            r.height = h;
+            AddRoof(h, s, p);
 
-            r.size = s;            
+            roofs[roofs.Count - 1].gameObject.SetActive(false);
 
-            r.transform.position = p;
-
-            r.Setup();
-
-            r.gameObject.SetActive(false);
-
-            r.gameObject.SetActive(true);
-
-            roofs.Add(r);
+            roofs[roofs.Count - 1].gameObject.SetActive(true);
 
             if (i % checkpointPerRoof == 0) {
 
@@ -73,13 +65,31 @@ public class SC_GM_RoofsChase : SC_GameManager {
 
                 c.transform.position = Vector3.up * p.y;
 
-                c.GetComponent<BoxCollider2D>().size = new Vector2(Cam.aspect * Cam.orthographicSize * 2, 1);
+                c.GetComponent<BoxCollider2D>().size = new Vector2(Cam.aspect * Cam.orthographicSize * 2, .1f);
 
                 c.transform.GetChild(0).transform.position += Vector3.right * p.x + Vector3.back * h;
 
             }
 
-        }        
+        }
+
+        AddRoof(7, new Vector2(19.2f, 5), new Vector3(0, roofs[roofs.Count - 1].transform.position.y + (roofs[roofs.Count - 1].size.y + 5) / 2 + 0.04f + (7 - roofs[roofs.Count - 1].height) * .4f, 0));
+
+    }
+
+    void AddRoof (float height, Vector2 size, Vector3 pos) {
+
+        SC_RoofsChase_Roof r = Instantiate(Resources.Load<SC_RoofsChase_Roof>("Prefabs/LD/PF_Roof"));
+
+        r.height = height;
+
+        r.size = size;
+
+        r.transform.position = pos;
+
+        r.Setup();
+
+        roofs.Add(r);
 
     }
 
