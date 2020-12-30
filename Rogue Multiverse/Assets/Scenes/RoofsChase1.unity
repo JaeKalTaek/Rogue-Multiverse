@@ -991,10 +991,16 @@ MonoBehaviour:
   playerSpawnPoint: {fileID: 1720910788}
   playerPrefab: {fileID: 1527618563215064362, guid: 468fd4e577aedd0448cce5b5d0554abb,
     type: 3}
-  alignments: 000000000100000002000000
+  alignmentTutorials:
+  - alignment: 0
+    tutorial: You're a superhero, catch the villain!
+  - alignment: 1
+    tutorial: You're a villain, try to run away from the superhero!
+  - alignment: 2
+    tutorial: You're an antihero, catch the villain!
   baseLives: 100
   livesText: {fileID: 407712695}
-  tutorial: {fileID: 0}
+  tutorial: {fileID: 189551293}
   checkpointPerRoof: 5
   levelLength: 10
   xDiffRange: {x: -5, y: 5}

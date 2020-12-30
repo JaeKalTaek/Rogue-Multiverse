@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,7 +14,16 @@ public class SC_GameManager : MonoBehaviour {
 
     public GameObject playerPrefab;
 
-    public List<Alignments> alignments;
+    [Serializable]
+    public struct AlignmentTutorial {
+
+        public Alignments alignment;
+
+        public string tutorial;
+
+    }
+
+    public List<AlignmentTutorial> alignmentTutorials;
 
     public int baseLives;
     int lives;
@@ -30,8 +40,16 @@ public class SC_GameManager : MonoBehaviour {
 
         SC_PlayerCharacter_RoofsChase p = Instantiate (playerPrefab, playerSpawnPoint.position, Quaternion.identity).GetComponent <SC_PlayerCharacter_RoofsChase> ();
 
-        if (alignments.Count > 0)
-            p.Alignment = alignments[Random.Range(0, alignments.Count)];
+        if (alignmentTutorials.Count > 0) {
+
+            int a = UnityEngine.Random.Range(0, alignmentTutorials.Count);
+
+            p.Alignment = alignmentTutorials[a].alignment;
+
+            if (tutorial)
+                tutorial.GetComponentInChildren<TextMeshProUGUI>().text = alignmentTutorials[a].tutorial + "\n" + tutorial.GetComponentInChildren<TextMeshProUGUI>().text;
+
+        }
 
         if (tutorial) {
 
