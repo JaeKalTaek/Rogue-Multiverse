@@ -1,16 +1,19 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static SC_BasePlayerCharacter;
 
-public class SC_GameManager : MonoBehaviour {
+public class SC_GameManager : MonoBehaviour {    
 
     public static SC_GameManager GM;
 
     public Transform playerSpawnPoint;
 
     public GameObject playerPrefab;
+
+    public List<Alignments> alignments;
 
     public int baseLives;
     int lives;
@@ -26,6 +29,9 @@ public class SC_GameManager : MonoBehaviour {
         GM = this;
 
         SC_PlayerCharacter_RoofsChase p = Instantiate (playerPrefab, playerSpawnPoint.position, Quaternion.identity).GetComponent <SC_PlayerCharacter_RoofsChase> ();
+
+        if (alignments.Count > 0)
+            p.Alignment = alignments[Random.Range(0, alignments.Count)];
 
         if (tutorial) {
 
@@ -63,6 +69,6 @@ public class SC_GameManager : MonoBehaviour {
 
         return lives < 0;
 
-    }
+    }    
 
 }

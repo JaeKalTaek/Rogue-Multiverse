@@ -27,7 +27,9 @@ public class SC_PlayerCharacter_RoofsChase : SC_BasePlayerCharacter {
 
     Collider2D under;
 
-    protected void Start () {
+    protected override void Start () {
+
+        base.Start();
 
         baseScale = transform.lossyScale;
 

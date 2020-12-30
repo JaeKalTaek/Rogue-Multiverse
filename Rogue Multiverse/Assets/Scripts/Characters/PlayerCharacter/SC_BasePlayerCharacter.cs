@@ -4,6 +4,10 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     public static SC_BasePlayerCharacter Player;
 
+    public enum Alignments { Superhero, Villain, AntiHero }
+
+    public Alignments Alignment { get; set; }
+
     [Header("Tweakable")]
     public float accelerationTime;
     public float moveSpeed;
@@ -18,7 +22,13 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     protected void Awake() {
 
-        Player = this;
+        Player = this;        
+
+    }
+
+    protected virtual void Start () {
+
+        GetComponent<SpriteRenderer>().color = Alignment == Alignments.Superhero ? Color.green : (Alignment == Alignments.Villain ? Color.red : Color.cyan);
 
     }
 

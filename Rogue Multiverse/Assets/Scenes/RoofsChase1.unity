@@ -991,11 +991,12 @@ MonoBehaviour:
   playerSpawnPoint: {fileID: 1720910788}
   playerPrefab: {fileID: 1527618563215064362, guid: 468fd4e577aedd0448cce5b5d0554abb,
     type: 3}
+  alignments: 000000000100000002000000
   baseLives: 100
   livesText: {fileID: 407712695}
   tutorial: {fileID: 0}
   checkpointPerRoof: 5
-  levelLength: 20
+  levelLength: 10
   xDiffRange: {x: -5, y: 5}
   yDiffRange: {x: 2, y: 6}
   maxRoofSize:
