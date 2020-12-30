@@ -38,9 +38,23 @@ public class SC_RoofsChase_Roof : MonoBehaviour {
 
             float h = sr.sprite.bounds.size.y - 1;
 
-            sr.transform.localPosition = new Vector3(w * (i + .5f), h * -(i + .5f), transform.position.y);
+            sr.transform.localPosition = new Vector3(w * (i + .5f), h * -(i + .5f), 0);
+
+            sr.transform.Set(null, null, transform.position.y);
 
             sr.size = new Vector2(size.x + w, size.y + h);
+
+            /*Collider2D c = sr.gameObject.AddComponent<PolygonCollider2D>();
+
+            Collider2D c2 = new GameObject().AddComponent<PolygonCollider2D>();
+
+            c2 = c;
+
+            c2.transform.parent = sr.transform;
+
+            c2.isTrigger = true;
+
+            c2.gameObject.layer = LayerMask.GetMask("Ignore Raycast");*/
 
         }
 
