@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public static class SC_ExtensionMethods {
 
@@ -23,6 +24,30 @@ public static class SC_ExtensionMethods {
     public static float Length (this AnimationCurve a) {
 
         return a.keys[a.length - 1].time;
+
+    }
+
+    public static void AddBefore (this TextMeshProUGUI t, string s) {
+
+        t.text = s + t.text;
+
+    }
+
+    public static float B (this float f, bool b) {
+
+        return f * (b ? 1 : -1);
+
+    }
+
+    public static float HalfWidth(this Camera c) {
+
+        return c.aspect * c.orthographicSize;
+
+    }
+
+    public static float Width (this Camera c) {
+
+        return c.HalfWidth() * 2f;
 
     }
 

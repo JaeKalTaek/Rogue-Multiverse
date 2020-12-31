@@ -10,6 +10,7 @@ public class SC_GameManager : MonoBehaviour {
 
     public static SC_GameManager GM;
 
+    [Header("Base GM parameters")]
     public Transform playerSpawnPoint;
 
     public GameObject playerPrefab;
@@ -46,8 +47,7 @@ public class SC_GameManager : MonoBehaviour {
 
             p.Alignment = alignmentTutorials[a].alignment;
 
-            if (tutorial)
-                tutorial.GetComponentInChildren<TextMeshProUGUI>().text = alignmentTutorials[a].tutorial + "\n" + tutorial.GetComponentInChildren<TextMeshProUGUI>().text;
+            tutorial?.GetComponentInChildren<TextMeshProUGUI>().AddBefore(alignmentTutorials[a].tutorial + "\n");
 
         }
 

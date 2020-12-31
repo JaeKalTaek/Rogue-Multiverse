@@ -9,11 +9,11 @@ public class SC_Camera_HUB : SC_Camera_Base {
 
             if (Cam.WorldToScreenPoint (Player.transform.position).x > Screen.width) {
 
-                Cam.transform.position += Vector3.right * Width;
+                Cam.transform.position += Vector3.right * Cam.Width();
 
             } else if (Cam.WorldToScreenPoint (Player.transform.position).x < 0) {
 
-                Cam.transform.position -= Vector3.right * Width;
+                Cam.transform.position -= Vector3.right * Cam.Width();
 
             }
 
