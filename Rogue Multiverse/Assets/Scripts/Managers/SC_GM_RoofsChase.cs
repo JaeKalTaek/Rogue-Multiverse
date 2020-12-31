@@ -11,9 +11,7 @@ public class SC_GM_RoofsChase : SC_GameManager {
     [Header("Procedural generation parameters")]
     public Vector2Int levelLength;
 
-    public Vector2Int xDiffRange, yDiffRange;
-
-    public AnimationCurve maxRoofSize, xDiff;
+    public AnimationCurve maxRoofSize, xDiff, yDiff;
 
     public int maxHeight;
 
@@ -41,7 +39,7 @@ public class SC_GM_RoofsChase : SC_GameManager {
 
             float xRange = Random.Range(-ClampedX(false), ClampedX(true));            
 
-            Vector3 p = LastRoof.transform.position + Vector3.right * xDiff.Evaluate(Mathf.Abs(xRange)).B(xRange >= 0) + Vector3.up * Random.Range (yDiffRange.x, yDiffRange.y + 1);
+            Vector3 p = LastRoof.transform.position + Vector3.right * xDiff.Evaluate(Mathf.Abs(xRange)).B(xRange >= 0) + Vector3.up * yDiff.Evaluate(Random.value);
 
             float h = Mathf.Clamp(LastRoof.height + Random.Range(-1, 2), 1, maxHeight);
 

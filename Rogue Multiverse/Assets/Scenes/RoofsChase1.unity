@@ -391,7 +391,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 513
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -472,7 +472,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &519420028
@@ -599,37 +599,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   percentageScreenToMove: 0.6
   moveSpeed: 5
---- !u!1 &607101816
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 607101817}
-  m_Layer: 0
-  m_Name: Buildings
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &607101817
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 607101816}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2028698749}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &783850829
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,20 +960,21 @@ MonoBehaviour:
   playerSpawnPoint: {fileID: 1720910788}
   playerPrefab: {fileID: 1527618563215064362, guid: 468fd4e577aedd0448cce5b5d0554abb,
     type: 3}
-  alignmentTutorials:
-  - alignment: 0
-    tutorial: You're a superhero, catch the villain!
+  alignmentTexts:
   - alignment: 1
-    tutorial: You're a villain, try to run away from the superhero!
+    tutorial: You're a superhero, catch the villain!
+    successMessage: You successfully caught the villain!
   - alignment: 2
+    tutorial: You're a villain, try to run away from the hero!
+    successMessage: You got caught, the scenario is completed!
+  - alignment: 3
     tutorial: You're an antihero, catch the villain!
-  baseLives: 100
+    successMessage: You successfully caught and punished the villain!
+  baseLives: 2
   livesText: {fileID: 407712695}
   tutorial: {fileID: 189551293}
   checkpointPerRoof: 5
   levelLength: {x: 20, y: 25}
-  xDiffRange: {x: -5, y: 5}
-  yDiffRange: {x: 2, y: 5}
   maxRoofSize:
     serializedVersion: 2
     m_Curve:
@@ -1116,9 +1086,42 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  yDiff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 2
+      inSlope: 0
+      outSlope: 6.6666665
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.15
+      value: 3
+      inSlope: 6.6666665
+      outSlope: 2.352941
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 5
+      inSlope: 2.352941
+      outSlope: 0
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   maxHeight: 5
-  maxDistance: 2.5
-  finalRoofHeight: 10
+  maxDistance: 2.75
+  finalRoofHeight: 8
   finalRoofLength: 5
 --- !u!4 &1165447764
 Transform:
@@ -1377,25 +1380,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &2028698749 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1126533865905237905, guid: a2518d064105c8a4c99c081a9f072f28,
-    type: 3}
-  m_PrefabInstance: {fileID: 1126533867106325484}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1126533867106325484
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 607101817}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1126533865905237905, guid: a2518d064105c8a4c99c081a9f072f28,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1126533865905237905, guid: a2518d064105c8a4c99c081a9f072f28,
         type: 3}
@@ -1450,7 +1447,7 @@ PrefabInstance:
     - target: {fileID: 1126533865905237909, guid: a2518d064105c8a4c99c081a9f072f28,
         type: 3}
       propertyPath: m_Name
-      value: RoofsChase_Roof (2)
+      value: StartRoof
       objectReference: {fileID: 0}
     - target: {fileID: 5523690755445071469, guid: a2518d064105c8a4c99c081a9f072f28,
         type: 3}

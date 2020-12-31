@@ -16,15 +16,17 @@ public class SC_GameManager : MonoBehaviour {
     public GameObject playerPrefab;
 
     [Serializable]
-    public struct AlignmentTutorial {
+    public struct AlignmentTexts {
 
         public Alignments alignment;
 
-        public string tutorial;
+        public string tutorial, successMessage;
 
     }
 
-    public List<AlignmentTutorial> alignmentTutorials;
+    public List<AlignmentTexts> alignmentTexts;
+
+    public string HUBmessage { get; set; }
 
     public int baseLives;
     int lives;
@@ -39,15 +41,17 @@ public class SC_GameManager : MonoBehaviour {
 
         GM = this;
 
-        SC_PlayerCharacter_RoofsChase p = Instantiate (playerPrefab, playerSpawnPoint.position, Quaternion.identity).GetComponent <SC_PlayerCharacter_RoofsChase> ();
+        SC_BasePlayerCharacter p = Instantiate (playerPrefab, playerSpawnPoint.position, Quaternion.identity).GetComponent <SC_BasePlayerCharacter> ();
 
-        if (alignmentTutorials.Count > 0) {
+        if (alignmentTexts.Count > 0) {
 
-            int a = UnityEngine.Random.Range(0, alignmentTutorials.Count);
+            int a = UnityEngine.Random.Range(0, alignmentTexts.Count);
 
-            p.Alignment = alignmentTutorials[a].alignment;
+            p.Alignment = alignmentTexts[a].alignment;
 
-            tutorial?.GetComponentInChildren<TextMeshProUGUI>().AddBefore(alignmentTutorials[a].tutorial + "\n");
+            tutorial?.GetComponentInChildren<TextMeshProUGUI>().AddBefore(alignmentTexts[a].tutorial + "\n");
+
+            HUBmessage = alignmentTexts[a].successMessage;
 
         }
 
@@ -61,8 +65,13 @@ public class SC_GameManager : MonoBehaviour {
 
         }
 
-        if (lives > 0)
-            livesText.text = "Lives: " + baseLives;      
+        if (lives > 0) {
+
+            DontDestroyOnLoad(this);
+
+            livesText.text = "Lives: " + baseLives;
+
+        }
 
     }
 
@@ -80,9 +89,13 @@ public class SC_GameManager : MonoBehaviour {
 
         lives--;
 
-        if (lives < 0)
-            SceneManager.LoadScene ("HUB");
-        else
+        if (lives < 0) {
+
+            HUBmessage = "You failed the scenario";
+
+            SceneManager.LoadScene("HUB");
+
+        } else
             livesText.text = "Lives: " + lives;
 
         return lives < 0;

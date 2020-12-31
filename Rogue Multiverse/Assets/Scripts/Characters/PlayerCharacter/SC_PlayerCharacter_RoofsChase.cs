@@ -41,11 +41,8 @@ public class SC_PlayerCharacter_RoofsChase : SC_BasePlayerCharacter {
 
         under = GetOver<Collider2D>("Ignore Raycast");
 
-        if (!Paused && GetOver<Collider2D>("Checkpoint")?.name == "End" && AirControl == 1) {
-
-            Paused = true;
-
-        }
+        if (!Paused && GetOver<Collider2D>("Checkpoint")?.name == "End" && AirControl == 1)
+            CompleteLevel();        
 
         base.Update();
 

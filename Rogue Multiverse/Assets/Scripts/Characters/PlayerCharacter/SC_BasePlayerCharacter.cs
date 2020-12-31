@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     public static SC_BasePlayerCharacter Player;
 
-    public enum Alignments { Superhero, Villain, AntiHero }
+    public enum Alignments { None, Superhero, Villain, AntiHero }
 
     public Alignments Alignment { get; set; }
 
@@ -28,7 +29,8 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     protected virtual void Start () {
 
-        GetComponent<SpriteRenderer>().color = Alignment == Alignments.Superhero ? Color.green : (Alignment == Alignments.Villain ? Color.red : Color.cyan);
+        if (Alignment != Alignments.None)
+            GetComponent<SpriteRenderer>().color = Alignment == Alignments.Superhero ? Color.green : (Alignment == Alignments.Villain ? Color.red : Color.cyan);
 
     }
 
@@ -48,6 +50,14 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
         }
 
         checkpoint = GetOver<SC_Checkpoint>("Checkpoint") ?? checkpoint;
+
+    }
+
+    protected void CompleteLevel () {
+
+        Paused = true;
+
+        SceneManager.LoadScene("HUB");
 
     }
 
