@@ -39,7 +39,7 @@ public class SC_GM_RoofsChase : SC_GameManager {
 
             Vector2 s = new Vector2(maxRoofSize.Evaluate (Random.value), maxRoofSize.Evaluate(Random.value));
 
-            float xRange = Random.Range(-ClampedX(false), ClampedX(true));
+            float xRange = Random.Range(-ClampedX(false), ClampedX(true));            
 
             Vector3 p = LastRoof.transform.position + Vector3.right * xDiff.Evaluate(Mathf.Abs(xRange)).B(xRange >= 0) + Vector3.up * Random.Range (yDiffRange.x, yDiffRange.y + 1);
 
@@ -56,7 +56,7 @@ public class SC_GM_RoofsChase : SC_GameManager {
 
             }
 
-            AddRoof(h, s, p);
+            AddRoof(h, s, p, "N°" + i);
 
             LastRoof.gameObject.SetActive(false);
 
@@ -84,23 +84,21 @@ public class SC_GM_RoofsChase : SC_GameManager {
 
         end.gameObject.layer = LayerMask.NameToLayer("Checkpoint");
 
-        AddRoof(finalRoofHeight, new Vector2(Cam.Width(), finalRoofLength), new Vector3(0, LastRoof.transform.position.y + (LastRoof.size.y + finalRoofLength) / 2 + 0.04f + (finalRoofHeight - LastRoof.height) * .4f, 0));
+        AddRoof(finalRoofHeight, new Vector2(Cam.Width(), finalRoofLength), new Vector3(0, LastRoof.transform.position.y + (LastRoof.size.y + finalRoofLength) / 2 + 0.04f + (finalRoofHeight - LastRoof.height) * .4f, 0), "Last");
 
     }
 
     float ClampedX (bool right) {
 
-        float clampedX = 1;
-
-        for (float x = 0; x <= 1; x += .1f)
+        for (float x = 0; x <= 1; x += .01f)
             if (xDiff.Evaluate(x) > Mathf.Abs(Cam.HalfWidth().B(right) - LastRoof.transform.position.x))
-                clampedX = Mathf.Max(0, x - .1f);
+                return Mathf.Max(0, x - .01f);
 
-        return clampedX;
+        return 1;
 
     }
 
-    void AddRoof (float height, Vector2 size, Vector3 pos) {
+    void AddRoof (float height, Vector2 size, Vector3 pos, string name) {
 
         SC_RoofsChase_Roof r = Instantiate(Resources.Load<SC_RoofsChase_Roof>("Prefabs/LD/PF_Roof"));
 
@@ -111,6 +109,8 @@ public class SC_GM_RoofsChase : SC_GameManager {
         r.transform.position = pos;
 
         r.Setup();
+
+        r.name = "Roof " + name;
 
         roofs.Add(r);
 
