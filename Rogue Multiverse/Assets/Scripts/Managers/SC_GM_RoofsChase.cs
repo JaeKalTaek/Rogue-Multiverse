@@ -89,7 +89,7 @@ public class SC_GM_RoofsChase : SC_GameManager {
     float ClampedX (bool right) {
 
         for (float x = 0; x <= 1; x += .01f)
-            if (xDiff.Evaluate(x) > Mathf.Abs(Cam.HalfWidth().B(right) - LastRoof.transform.position.x))
+            if (xDiff.Evaluate(x) > Mathf.Abs(Cam.HalfWidth().B(right) - (LastRoof.transform.position.x + 1f)))
                 return Mathf.Max(0, x - .01f);
 
         return 1;
