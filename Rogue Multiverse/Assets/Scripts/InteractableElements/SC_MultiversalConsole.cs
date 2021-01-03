@@ -2,10 +2,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using static SC_BasePlayerCharacter;
-using static SC_GameManager;
+using static SC_SaveFile;
 
 public class SC_MultiversalConsole : SC_InteractableElement {
 
+    [Header ("Progress parameters")]
+    public int[] progressSteps;
+
+    [Header("UI")]
     public Slider progressBar;
 
     public TextMeshProUGUI progressText;
@@ -13,8 +17,6 @@ public class SC_MultiversalConsole : SC_InteractableElement {
     public Button discoveryButton;
 
     public GameObject discoveryCompleted;
-
-    SC_GM_HUB G { get { return GM as SC_GM_HUB; } }
 
     public override void Interact() {
 
@@ -25,10 +27,22 @@ public class SC_MultiversalConsole : SC_InteractableElement {
 
     }
 
+    public void Discover () {
+
+        save.currentProgress -= progressSteps[save.currentProgressStep];
+
+        save.currentProgressStep++;
+
+        UpdateValues ();
+
+    }
 
     public void UpdateValues () {
 
-        if (G.CurrentProgressStep == G.progressSteps.Length - 1) {
+        for (int i = 0; i <= save.currentProgressStep; i++)
+            menu.transform.GetChild (0).GetChild (i).gameObject.SetActive (true);
+
+        if (save.currentProgressStep == progressSteps.Length - 1) {
 
             progressBar.transform.parent.gameObject.SetActive(false);
 
@@ -36,11 +50,11 @@ public class SC_MultiversalConsole : SC_InteractableElement {
 
         } else {
 
-            progressBar.value = Mathf.Clamp01(G.Progress);
+            progressBar.value = Mathf.Clamp01(save.currentProgress / (float) progressSteps[save.currentProgressStep]);
 
-            progressText.text = G.CurrentProgress + "/" + G.progressSteps[G.CurrentProgressStep];
+            progressText.text = save.currentProgress + "/" + progressSteps[save.currentProgressStep];
 
-            discoveryButton.interactable = G.Progress >= 1;
+            discoveryButton.interactable = save.currentProgress / (float) progressSteps[save.currentProgressStep] >= 1;
 
         }
 

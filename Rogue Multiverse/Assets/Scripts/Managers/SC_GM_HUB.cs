@@ -1,26 +1,20 @@
 ﻿using TMPro;
 using UnityEngine;
+using static SC_SaveFile;
 
-public class SC_GM_HUB : SC_GameManager {
-
-    public SC_MultiversalConsole console;
-
-    [Header("HUB/Meta parameters")]
-    public int[] progressSteps;
-
-    public int CurrentProgress { get; set; }
-
-    public int CurrentProgressStep { get; set; }
-
-    public float Progress { get { return CurrentProgress / (float)progressSteps[CurrentProgressStep]; } }    
+public class SC_GM_HUB : SC_GameManager {  
 
     protected override void Start() {
+
+        if(save == null)
+            SetSave ();
 
         if (GM) {
 
             tutorial.GetComponentInChildren<TextMeshProUGUI>().text = GM.HUBmessage;
 
-            CurrentProgress += GM.HUBmessage.Contains("failed") ? 0 : 1;
+            save.currentProgress += GM.HUBmessage.Contains("failed") ? 0 : 1;
+            Save ();
 
             Destroy(GM.gameObject);
 
@@ -29,17 +23,16 @@ public class SC_GM_HUB : SC_GameManager {
 
         base.Start();        
 
-    }
+    }    
 
-    public void Discover () {
+    void Update () {
 
-        CurrentProgress -= progressSteps[CurrentProgressStep];
+        if (Input.GetKeyDown (KeyCode.Escape)) {
 
-        CurrentProgressStep++;
+            save = new SC_SaveFile ();
+            Save ();
 
-        console.menu.transform.GetChild(0).GetChild(CurrentProgressStep).gameObject.SetActive(true);
-
-        console.UpdateValues();
+        }
 
     }
 

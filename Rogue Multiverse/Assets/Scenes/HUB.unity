@@ -203,7 +203,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1165447763}
+      - m_Target: {fileID: 1699126163}
         m_MethodName: Discover
         m_Mode: 1
         m_Arguments:
@@ -2707,8 +2707,6 @@ MonoBehaviour:
   baseLives: 0
   livesText: {fileID: 0}
   tutorial: {fileID: 1079404027}
-  console: {fileID: 1699126163}
-  progressSteps: 010000000200000004000000
 --- !u!4 &1165447764
 Transform:
   m_ObjectHideFlags: 0
@@ -3903,6 +3901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menu: {fileID: 2107227819}
+  progressSteps: 010000000200000004000000
   progressBar: {fileID: 193634223}
   progressText: {fileID: 1587142773}
   discoveryButton: {fileID: 45051491}

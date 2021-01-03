@@ -32,6 +32,8 @@ public class SC_Teleporter : SC_InteractableElement {
 
     public void Teleport () {
 
+        SC_SaveFile.Save ();
+
         SceneManager.LoadScene ("RoofsChase1");
 
     }
