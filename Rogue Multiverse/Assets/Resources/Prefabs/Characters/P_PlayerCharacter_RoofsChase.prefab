@@ -123,5 +123,5 @@ MonoBehaviour:
     m_RotationOrder: 4
   jumpControl: 0.9
   fallControl: 0.9
-  deathHeight: 3
+  deathHeight: 1
   spriteSizePerUnit: 0.05
