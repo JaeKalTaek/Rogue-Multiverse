@@ -11,7 +11,9 @@ public class SC_GM_RoofsChase : SC_GameManager {
     [Header("Procedural generation parameters")]
     public Vector2Int levelLength;
 
-    public AnimationCurve maxRoofSize, xDiff, yDiff;
+    public AnimationCurve maxRoofSize, xDiff;
+    public float xMargin;
+    public AnimationCurve yDiff;
 
     public int maxHeight;
 
@@ -89,7 +91,7 @@ public class SC_GM_RoofsChase : SC_GameManager {
     float ClampedX (bool right) {
 
         for (float x = 0; x <= 1; x += .01f)
-            if (xDiff.Evaluate(x) > Mathf.Abs(Cam.HalfWidth().B(right) - (LastRoof.transform.position.x + 1f)))
+            if (xDiff.Evaluate(x) > Mathf.Abs((Cam.HalfWidth() - xMargin).B(right) - LastRoof.transform.position.x))
                 return Mathf.Max(0, x - .01f);
 
         return 1;

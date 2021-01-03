@@ -974,7 +974,7 @@ MonoBehaviour:
   livesText: {fileID: 407712695}
   tutorial: {fileID: 189551293}
   checkpointPerRoof: 5
-  levelLength: {x: 20, y: 25}
+  levelLength: {x: 10, y: 15}
   maxRoofSize:
     serializedVersion: 2
     m_Curve:
@@ -1086,6 +1086,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  xMargin: 1
   yDiff:
     serializedVersion: 2
     m_Curve:
