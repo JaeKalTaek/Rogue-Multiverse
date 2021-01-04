@@ -1268,6 +1268,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menu: {fileID: 1172494548}
+  levels:
+  - RoofsChase1
+  - RoofsChase2
+  - RoofsChase3
 --- !u!1 &762856857
 GameObject:
   m_ObjectHideFlags: 0

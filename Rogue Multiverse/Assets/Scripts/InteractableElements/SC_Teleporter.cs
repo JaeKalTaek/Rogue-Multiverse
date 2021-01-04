@@ -1,8 +1,11 @@
 ﻿using UnityEngine.SceneManagement;
+using UnityEngine;
 using UnityEngine.UI;
 using static SC_BasePlayerCharacter;
 
 public class SC_Teleporter : SC_InteractableElement {
+
+    public string[] levels;
 
     bool close;
 
@@ -34,7 +37,7 @@ public class SC_Teleporter : SC_InteractableElement {
 
         SC_SaveFile.Save ();
 
-        SceneManager.LoadScene ("RoofsChase1");
+        SceneManager.LoadScene (levels[Random.Range(0, SC_SaveFile.save.currentProgressStep + 1)]);
 
     }
 

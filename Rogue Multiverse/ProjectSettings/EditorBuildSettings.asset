@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RoofsChase1.unity
     guid: 7618174230f120e49bb19b11fffe5733
+  - enabled: 1
+    path: Assets/Scenes/RoofsChase2.unity
+    guid: 8370b0f380fdcf244990632eb4162ff0
+  - enabled: 1
+    path: Assets/Scenes/RoofsChase3.unity
+    guid: e57a71ebe724bea499b232ed5177bb1a
   m_configObjects: {}
