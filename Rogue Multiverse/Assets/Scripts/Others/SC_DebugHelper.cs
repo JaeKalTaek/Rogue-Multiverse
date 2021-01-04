@@ -8,7 +8,7 @@ public class SC_DebugHelper : MonoBehaviour {
 
     TextMeshProUGUI t;
 
-    void Start () {
+    void Awake () {
 
         Instance = this;
 
