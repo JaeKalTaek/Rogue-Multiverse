@@ -29,6 +29,10 @@ public class SC_GM_RoofsChase : SC_GameManager {
 
     SC_RoofsChase_Roof LastRoof { get { return roofs[roofs.Count - 1]; } }
 
+    [Header("Prefabs")]
+    public GameObject roofPrefab;
+    public GameObject checkpointPrefab;
+
     protected override void Start() {
 
         base.Start ();
@@ -64,7 +68,7 @@ public class SC_GM_RoofsChase : SC_GameManager {
 
             if (i % checkpointPerRoof == 0) {
 
-                SC_Checkpoint c = Instantiate(Resources.Load<SC_Checkpoint>("Prefabs/LD/PF_Checkpoint"));
+                GameObject c = Instantiate (checkpointPrefab);
 
                 c.transform.position = Vector3.up * p.y;
 
@@ -100,7 +104,7 @@ public class SC_GM_RoofsChase : SC_GameManager {
 
     void AddRoof (float height, Vector2 size, Vector3 pos, string name) {
 
-        SC_RoofsChase_Roof r = Instantiate(Resources.Load<SC_RoofsChase_Roof>("Prefabs/LD/PF_Roof"));
+        SC_RoofsChase_Roof r = Instantiate (roofPrefab).GetComponent<SC_RoofsChase_Roof> ();
 
         r.height = height;
 

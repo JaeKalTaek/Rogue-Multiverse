@@ -7,7 +7,7 @@ public class SC_RoofsChase_Roof : MonoBehaviour {
 
     public float height;
 
-    List<SpriteRenderer> floors;
+    public Sprite buildingSprite;
 
     public void Setup() {
 
@@ -32,7 +32,7 @@ public class SC_RoofsChase_Roof : MonoBehaviour {
 
             sr.drawMode = SpriteDrawMode.Sliced;
 
-            sr.sprite = Resources.Load<Sprite>("Sprites/LD/RoofsChase/Building");
+            sr.sprite = buildingSprite;
 
             float w = sr.sprite.bounds.size.x - 1;
 

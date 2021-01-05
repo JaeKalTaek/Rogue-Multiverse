@@ -1124,6 +1124,10 @@ MonoBehaviour:
   maxDistance: 2.75
   finalRoofHeight: 8
   finalRoofLength: 5
+  roofPrefab: {fileID: 1126533865905237909, guid: a2518d064105c8a4c99c081a9f072f28,
+    type: 3}
+  checkpointPrefab: {fileID: 12545447585153791, guid: 41127da9c34e3df41b05674b870c329a,
+    type: 3}
 --- !u!4 &1165447764
 Transform:
   m_ObjectHideFlags: 0
@@ -1442,6 +1446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: {x: 2, y: 2}
   height: 1
+  buildingSprite: {fileID: 0}
 --- !u!212 &2028698748
 SpriteRenderer:
   m_ObjectHideFlags: 0
