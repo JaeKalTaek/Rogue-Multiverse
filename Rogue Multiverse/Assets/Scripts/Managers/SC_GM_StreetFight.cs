@@ -6,11 +6,7 @@ public class SC_GM_StreetFight : SC_GameManager {
 
     [Header ("Street Fight variables")]
     public float levelLength;
-
-    [Header ("Background buldings variables")]
-    public Vector2 buildingsSpacing;
-
-    SpriteRenderer lastBuilding;
+    public Vector2 buildingsSpacing;    
 
     [Header ("Sprites")]
     public List<SpriteRenderer> tiledSprites;
@@ -22,6 +18,8 @@ public class SC_GM_StreetFight : SC_GameManager {
 
         foreach (SpriteRenderer s in tiledSprites)
             s.size = new Vector2 (levelLength * Cam.Width(), s.size.y);
+
+        SpriteRenderer lastBuilding = null;
 
         do {
 
