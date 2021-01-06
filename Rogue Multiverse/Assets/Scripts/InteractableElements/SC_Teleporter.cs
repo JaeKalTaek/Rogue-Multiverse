@@ -2,10 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using static SC_BasePlayerCharacter;
+using System.Collections.Generic;
 
 public class SC_Teleporter : SC_InteractableElement {
 
-    public string[] levels;
+    public List<string> levels;
 
     bool close;
 

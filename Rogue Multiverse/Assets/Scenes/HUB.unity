@@ -1270,8 +1270,8 @@ MonoBehaviour:
   menu: {fileID: 1172494548}
   levels:
   - RoofsChase1
+  - StreetFight1
   - RoofsChase2
-  - RoofsChase3
 --- !u!1 &762856857
 GameObject:
   m_ObjectHideFlags: 0

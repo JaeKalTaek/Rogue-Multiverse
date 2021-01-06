@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public static class SC_ExtensionMethods {
@@ -48,6 +49,12 @@ public static class SC_ExtensionMethods {
     public static float Width (this Camera c) {
 
         return c.HalfWidth() * 2f;
+
+    }
+
+    public static T RandomItem<T> (this List<T> list) {
+
+        return list[Random.Range (0, list.Count)];
 
     }
 
