@@ -24,7 +24,7 @@ public class SC_PC_HUB : SC_BasePlayerCharacter {
 
             if (!Grounded)
                 movement += Vector2.down * gravity * Time.deltaTime;
-            else if (Input.GetAxisRaw ("Vertical") > 0) {
+            else if (Input.GetButtonDown("Vertical") || Input.GetButtonDown ("Jump")) {
 
                 jumpTime = 0;
 
@@ -42,7 +42,7 @@ public class SC_PC_HUB : SC_BasePlayerCharacter {
 
             movement += Vector2.up * (Mathf.Lerp (jumpStart, jumpStart + jumpHeight, lerp) - transform.position.y);
 
-            jumpTime = (lerp >= 1) || (Input.GetAxis ("Vertical") <= 0) ? -1 : jumpTime;
+            jumpTime = (lerp < 1) && (Input.GetButton ("Vertical") || Input.GetButton ("Jump")) ? jumpTime : -1;
 
         }
 
