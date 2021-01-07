@@ -5,7 +5,7 @@ public class SC_PC_HUB : SC_BasePlayerCharacter {
     [Header ("Tweakable")]
     public float gravity;
     public float airControl;
-    public float jumpHeight, jumpDuration;
+    public AnimationCurve jump;
 
     float jumpStart;
     float jumpTime = -1;
@@ -36,13 +36,11 @@ public class SC_PC_HUB : SC_BasePlayerCharacter {
 
         if (jumpTime >= 0) {
 
-            jumpTime += Time.deltaTime;
+            jumpTime = Mathf.Min (jump.Length (), jumpTime + Time.deltaTime);
 
-            float lerp = jumpTime / jumpDuration;
+            movement += Vector2.up * (jumpStart + jump.Evaluate (jumpTime) - transform.position.y);
 
-            movement += Vector2.up * (Mathf.Lerp (jumpStart, jumpStart + jumpHeight, lerp) - transform.position.y);
-
-            jumpTime = (lerp < 1 && Input.GetButton ("Jump")) ? jumpTime : -1;
+            jumpTime = (jumpTime < jump.Length () && Input.GetButton ("Jump")) ? jumpTime : -1;
 
         }
 

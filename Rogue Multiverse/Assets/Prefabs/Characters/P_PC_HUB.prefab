@@ -96,7 +96,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accelerationTime: 0.5
   moveSpeed: 6
-  gravity: 4
+  gravity: 3.75
   airControl: 0.9
-  jumpHeight: 1.5
-  jumpDuration: 0.25
+  jump:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 18.261635
+      outSlope: 18.261635
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.05514706
+    - serializedVersion: 3
+      time: 0.3
+      value: 1.75
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
