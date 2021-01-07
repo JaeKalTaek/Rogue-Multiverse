@@ -1122,7 +1122,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   maxHeight: 5
-  maxDistance: 2.75
+  maxDistance: 2.65
   finalRoofHeight: 8
   finalRoofLength: 5
   roofPrefab: {fileID: 1126533865905237909, guid: a2518d064105c8a4c99c081a9f072f28,
