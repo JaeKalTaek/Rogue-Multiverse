@@ -19,8 +19,6 @@ public class SC_PlayerCharacter_RoofsChase : SC_BasePlayerCharacter {
     protected float jumpTime;
     float? jumpStart = null;
 
-    protected float verticalAcceleration;
-
     Vector3 baseScale;
 
     float baseCamDistance;
@@ -50,13 +48,11 @@ public class SC_PlayerCharacter_RoofsChase : SC_BasePlayerCharacter {
 
     float AirControl { get { return jumpStart != null ? jumpControl : ((!under || under.transform.position.z > transform.position.z) ? fallControl : 1); } }
 
-    protected override Vector2 BaseMovement => base.BaseMovement * AirControl;
+    protected override Vector2 XMovement => base.XMovement * AirControl;
 
     protected override void AdditionalMovement () {
 
-        verticalAcceleration += Mathf.Clamp (verticalAcceleration += Time.deltaTime * (Input.GetAxis ("Vertical") != 0 ? 1 : -1), 0, accelerationTime);
-
-        Move (Vector2.up * Input.GetAxis ("Vertical") * Mathf.Lerp (0, moveSpeed, verticalAcceleration / accelerationTime) * Time.deltaTime * AirControl);        
+        Move (YMovement * AirControl);        
 
         if (jumpStart == null) {
 

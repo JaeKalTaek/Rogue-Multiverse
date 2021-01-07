@@ -13,9 +13,11 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
     public float accelerationTime;
     public float moveSpeed;
 
-    protected float horizontalAcceleration;
+    protected float horizontalAcceleration, verticalAcceleration;
 
-    protected virtual Vector2 BaseMovement { get { return (Vector2.right * Input.GetAxis("Horizontal") * Mathf.Lerp(0, moveSpeed, horizontalAcceleration / accelerationTime) * Time.deltaTime); } }
+    protected virtual Vector2 XMovement { get { return (Vector2.right * Input.GetAxis("Horizontal") * Mathf.Lerp(0, moveSpeed, horizontalAcceleration / accelerationTime) * Time.deltaTime); } }
+
+    protected virtual Vector2 YMovement { get { return Vector2.up * Input.GetAxis ("Vertical") * Mathf.Lerp (0, moveSpeed, verticalAcceleration / accelerationTime) * Time.deltaTime; } }
 
     public bool Paused { get; set; }
 
@@ -43,7 +45,9 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
             horizontalAcceleration = Mathf.Clamp(horizontalAcceleration += Time.deltaTime * (Input.GetAxis("Horizontal") != 0 ? 1 : -1), 0, accelerationTime);
 
-            Move(BaseMovement);
+            verticalAcceleration += Mathf.Clamp (verticalAcceleration += Time.deltaTime * (Input.GetAxis ("Vertical") != 0 ? 1 : -1), 0, accelerationTime);
+
+            Move (XMovement);
 
             AdditionalMovement();
 
@@ -61,16 +65,24 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     }
 
+    protected virtual RaycastHit2D MovementCheck (Vector2 movement) {
+
+        return Physics2D.BoxCast (transform.position, transform.lossyScale, 0, movement, movement.magnitude, LayerMask.GetMask ("Default"));
+
+    }
+
     protected virtual bool Move(Vector2 movement) {
 
         if (movement != Vector2.zero) {
 
-            RaycastHit2D t = Physics2D.BoxCast(transform.position, transform.lossyScale, 0, movement, movement.magnitude, LayerMask.GetMask("Default"));
+            if (!MovementCheck(movement).collider) {
 
-            if (!t.collider)
-                transform.position += movement.V3();
+                transform.position += movement.V3 ();
 
-            return t.collider;
+                return false;
+
+            } else
+                return true;
 
         } else
             return false;

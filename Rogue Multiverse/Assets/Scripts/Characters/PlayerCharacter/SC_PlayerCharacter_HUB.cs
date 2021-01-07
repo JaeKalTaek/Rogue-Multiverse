@@ -14,7 +14,7 @@ public class SC_PlayerCharacter_HUB : SC_BasePlayerCharacter {
 
     public override bool CanInteract => base.CanInteract && Grounded;
 
-    protected override Vector2 BaseMovement => base.BaseMovement * (Grounded || (jumpTime >= 0) ? 1 : airControl);
+    protected override Vector2 XMovement => base.XMovement * (Grounded || (jumpTime >= 0) ? 1 : airControl);
 
     protected override void AdditionalMovement () {        
 
