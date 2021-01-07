@@ -1,18 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SC_StreetFightEnemy_Base : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class SC_StreetFightEnemy_Base : SC_BaseCharacter {
+    
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
