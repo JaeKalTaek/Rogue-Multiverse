@@ -973,6 +973,7 @@ MonoBehaviour:
   baseLives: 2
   livesText: {fileID: 407712695}
   tutorial: {fileID: 189551293}
+  tutorialDuration: 2
   checkpointPerRoof: 5
   levelLength: {x: 15, y: 20}
   maxRoofSize:

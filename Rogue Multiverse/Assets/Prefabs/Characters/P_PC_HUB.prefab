@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8010837244575500744}
   - component: {fileID: 9183873638350033779}
   m_Layer: 9
-  m_Name: P_PlayerCharacter_HUB
+  m_Name: P_PC_HUB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,9 +94,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f8a59b96d9caff4f86a4aef5020139a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationTime: 1
+  accelerationTime: 0.5
   moveSpeed: 6
   gravity: 4
   airControl: 0.9
-  jumpHeight: 1
-  jumpDuration: 0.15
+  jumpHeight: 1.5
+  jumpDuration: 0.25

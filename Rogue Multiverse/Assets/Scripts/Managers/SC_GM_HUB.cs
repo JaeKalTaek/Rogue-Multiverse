@@ -11,15 +11,14 @@ public class SC_GM_HUB : SC_GameManager {
 
         if (GM) {
 
-            tutorial.GetComponentInChildren<TextMeshProUGUI>().text = GM.HUBmessage;
+            tutorial.GetComponentInChildren<TextMeshProUGUI>().AddBefore (GM.HUBmessage + "\n");
 
             save.currentProgress += GM.HUBmessage.Contains("failed") ? 0 : 1;
             Save ();
 
             Destroy(GM.gameObject);
 
-        } else
-            tutorial = null;
+        }
 
         base.Start();        
 

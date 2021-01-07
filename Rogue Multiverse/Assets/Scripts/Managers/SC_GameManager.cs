@@ -34,6 +34,7 @@ public class SC_GameManager : MonoBehaviour {
     public TextMeshProUGUI livesText;
 
     public GameObject tutorial;
+    public float tutorialDuration;
 
     protected virtual void Start() {
 
@@ -77,7 +78,7 @@ public class SC_GameManager : MonoBehaviour {
 
     IEnumerator TutorialDuration () {
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(tutorialDuration);
 
         tutorial.SetActive(false);
 

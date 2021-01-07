@@ -2575,7 +2575,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Movement - Arrow Keys
 
-    Jump - Spacebar'
+    Jump - Spacebar/Up
+
+    Interact - E'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2711,6 +2713,7 @@ MonoBehaviour:
   baseLives: 0
   livesText: {fileID: 0}
   tutorial: {fileID: 1079404027}
+  tutorialDuration: 2
 --- !u!4 &1165447764
 Transform:
   m_ObjectHideFlags: 0
