@@ -2575,7 +2575,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Movement - Arrow Keys
 
-    Jump - Spacebar/Up
+    Jump - Spacebar
 
     Interact - E'
   m_isRightToLeft: 0
