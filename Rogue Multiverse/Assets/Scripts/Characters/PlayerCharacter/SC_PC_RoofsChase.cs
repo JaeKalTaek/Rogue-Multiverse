@@ -2,7 +2,7 @@
 using static SC_GameManager;
 using static SC_Camera_Base;
 
-public class SC_PlayerCharacter_RoofsChase : SC_BasePlayerCharacter {
+public class SC_PC_RoofsChase : SC_BasePlayerCharacter {
 
     public float gravity;
 

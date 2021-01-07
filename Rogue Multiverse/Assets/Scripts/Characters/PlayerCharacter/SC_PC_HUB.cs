@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SC_PlayerCharacter_HUB : SC_BasePlayerCharacter {
+public class SC_PC_HUB : SC_BasePlayerCharacter {
 
     [Header ("Tweakable")]
     public float gravity;
