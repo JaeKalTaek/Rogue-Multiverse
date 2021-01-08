@@ -17,6 +17,9 @@ public class SC_PC_RoofsChase : SC_BasePlayerCharacter {
 
     public float deathHeight, spriteSizePerUnit, respawnPause;
 
+    public Vector2 shadowOffset;
+    SpriteRenderer shadow;
+
     protected float jumpTime;
     float? jumpStart = null;
 
@@ -34,6 +37,13 @@ public class SC_PC_RoofsChase : SC_BasePlayerCharacter {
 
         baseCamDistance = Vector2.Distance(transform.position, Cam.transform.position);
 
+        shadow = new GameObject ("Shadow").AddComponent<SpriteRenderer> ();
+        shadow.sprite = GetComponent<SpriteRenderer> ().sprite;
+        shadow.color = new Color (0, 0, 0, .9f);
+        shadow.sortingLayerName = "Player";
+        shadow.transform.parent = transform;
+        shadow.transform.localPosition = Vector3.zero;
+        shadow.transform.localScale = Vector3.one;
     }
 
     protected override void Update() {        
@@ -44,6 +54,10 @@ public class SC_PC_RoofsChase : SC_BasePlayerCharacter {
             CompleteLevel();        
 
         base.Update();
+
+        transform.localScale = baseScale - Vector3.one * spriteSizePerUnit * transform.position.z;
+
+        shadow.transform.localPosition = shadowOffset * ((under?.transform.position.z ?? deathHeight) - transform.position.z);
 
     }
 
@@ -92,7 +106,9 @@ public class SC_PC_RoofsChase : SC_BasePlayerCharacter {
 
         }
 
-        transform.localScale = baseScale - Vector3.one * spriteSizePerUnit * transform.position.z;
+        /*transform.localScale = baseScale - Vector3.one * spriteSizePerUnit * transform.position.z;
+
+        shadow.transform.localPosition = shadowOffset * ((under?.transform.position.z ?? deathHeight) - transform.position.z);*/
 
     }    
 

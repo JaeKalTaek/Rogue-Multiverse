@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2139127809
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: db82f37bf557e8244a0ae0d7a28affa1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -126,5 +126,6 @@ MonoBehaviour:
   jumpControl: 0.9
   fallControl: 0.9
   deathHeight: 1
-  spriteSizePerUnit: 0.05
+  spriteSizePerUnit: 0.07
   respawnPause: 0.5
+  shadowOffset: {x: 0.05, y: -0.2}
