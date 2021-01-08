@@ -40,7 +40,6 @@ public class SC_PC_RoofsChase : SC_BasePlayerCharacter {
         shadow = new GameObject ("Shadow").AddComponent<SpriteRenderer> ();
         shadow.sprite = GetComponent<SpriteRenderer> ().sprite;
         shadow.color = new Color (0, 0, 0, .9f);
-        shadow.sortingLayerName = "Player";
         shadow.transform.parent = transform;
         shadow.transform.localPosition = Vector3.zero;
         shadow.transform.localScale = Vector3.one;
@@ -57,7 +56,12 @@ public class SC_PC_RoofsChase : SC_BasePlayerCharacter {
 
         transform.localScale = baseScale - Vector3.one * spriteSizePerUnit * transform.position.z;
 
-        shadow.transform.localPosition = shadowOffset * ((under?.transform.position.z ?? deathHeight) - transform.position.z);
+        bool grounded = under?.transform.position.z == transform.position.z;
+
+        shadow.sortingLayerName = grounded ? "Default" : "Player";
+        shadow.sortingOrder = grounded ? 1 : 0;
+
+        shadow.transform.localPosition = shadowOffset * (grounded ? 1 : ((under?.transform.position.z ?? deathHeight) - transform.position.z));
 
     }
 
@@ -105,10 +109,6 @@ public class SC_PC_RoofsChase : SC_BasePlayerCharacter {
                 jumpStart = null;
 
         }
-
-        /*transform.localScale = baseScale - Vector3.one * spriteSizePerUnit * transform.position.z;
-
-        shadow.transform.localPosition = shadowOffset * ((under?.transform.position.z ?? deathHeight) - transform.position.z);*/
 
     }    
 

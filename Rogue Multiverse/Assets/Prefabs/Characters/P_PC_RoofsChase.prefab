@@ -128,4 +128,4 @@ MonoBehaviour:
   deathHeight: 1
   spriteSizePerUnit: 0.07
   respawnPause: 0.5
-  shadowOffset: {x: 0.05, y: -0.2}
+  shadowOffset: {x: 0.05, y: -0.15}
