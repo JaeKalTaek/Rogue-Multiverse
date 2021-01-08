@@ -95,4 +95,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   accelerationTime: 1
+  accelerationStrength: 1
+  decelerationStrength: -1
   moveSpeed: 5

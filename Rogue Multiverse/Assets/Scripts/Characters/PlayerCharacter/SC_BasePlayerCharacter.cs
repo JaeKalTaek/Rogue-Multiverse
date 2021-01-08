@@ -9,15 +9,16 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     public Alignments Alignment { get; set; }
 
-    [Header("Tweakable")]
+    [Header ("Tweakable")]
     public float accelerationTime;
+    public float accelerationStrength, decelerationStrength;
     public float moveSpeed;
 
     protected float horizontalAcceleration, verticalAcceleration;
 
-    protected virtual Vector2 XMovement { get { return (Vector2.right * Input.GetAxis("Horizontal") * Mathf.Lerp(0, moveSpeed, horizontalAcceleration / accelerationTime) * Time.deltaTime); } }
+    protected virtual Vector2 XMovement { get { return (Vector2.right * Input.GetAxis ("Horizontal") * (accelerationTime == 0 ? moveSpeed : Mathf.Lerp(0, moveSpeed, horizontalAcceleration / accelerationTime)) * Time.deltaTime); } }
 
-    protected virtual Vector2 YMovement { get { return Vector2.up * Input.GetAxis ("Vertical") * Mathf.Lerp (0, moveSpeed, verticalAcceleration / accelerationTime) * Time.deltaTime; } }
+    protected virtual Vector2 YMovement { get { return Vector2.up * Input.GetAxis ("Vertical") * (accelerationTime == 0 ? moveSpeed : Mathf.Lerp (0, moveSpeed, verticalAcceleration / accelerationTime)) * Time.deltaTime; } }
 
     public bool Paused { get; set; }
 
@@ -43,9 +44,9 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
         if (!Paused) {
 
-            horizontalAcceleration = Mathf.Clamp(horizontalAcceleration += Time.deltaTime * (Input.GetAxis("Horizontal") != 0 ? 1 : -1), 0, accelerationTime);
+            horizontalAcceleration = Mathf.Clamp(horizontalAcceleration + Time.deltaTime * (Input.GetAxis("Horizontal") != 0 ? accelerationStrength : decelerationStrength), 0, accelerationTime);
 
-            verticalAcceleration += Mathf.Clamp (verticalAcceleration += Time.deltaTime * (Input.GetAxis ("Vertical") != 0 ? 1 : -1), 0, accelerationTime);
+            verticalAcceleration = Mathf.Clamp (verticalAcceleration + Time.deltaTime * (Input.GetAxis ("Vertical") != 0 ? accelerationStrength : decelerationStrength), 0, accelerationTime);
 
             Move (XMovement);
 

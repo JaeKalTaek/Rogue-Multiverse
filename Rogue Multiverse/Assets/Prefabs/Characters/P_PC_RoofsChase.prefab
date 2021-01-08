@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8333441286386951489}
   - component: {fileID: 4843006557993795876}
   m_Layer: 9
-  m_Name: P_PlayerCharacter_RoofsChase
+  m_Name: P_PC_RoofsChase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,8 +94,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb266480dc70b445b724089b1e31116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationTime: 1
-  moveSpeed: 4
+  accelerationTime: 0
+  accelerationStrength: 0
+  decelerationStrength: 0
+  moveSpeed: 3.5
   gravity: 6
   jumpCurve:
     serializedVersion: 2
