@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using static SC_GameManager;
 using static SC_Camera_Base;
+using System.Collections;
 
 public class SC_PC_RoofsChase : SC_BasePlayerCharacter {
 
@@ -14,7 +15,7 @@ public class SC_PC_RoofsChase : SC_BasePlayerCharacter {
     [Range(0f, 1f)]
     public float fallControl;
 
-    public float deathHeight, spriteSizePerUnit;
+    public float deathHeight, spriteSizePerUnit, respawnPause;
 
     protected float jumpTime;
     float? jumpStart = null;
@@ -66,6 +67,10 @@ public class SC_PC_RoofsChase : SC_BasePlayerCharacter {
 
                     Cam.GetComponent<SC_Camera_RoofsChase>().Respawned(baseCamDistance);
 
+                    Paused = true;
+
+                    StartCoroutine (RespawnPause ());
+
                 }
 
             } else if (Input.GetButtonDown("Jump")) {
@@ -90,5 +95,13 @@ public class SC_PC_RoofsChase : SC_BasePlayerCharacter {
         transform.localScale = baseScale - Vector3.one * spriteSizePerUnit * transform.position.z;
 
     }    
+
+    IEnumerator RespawnPause () {
+
+        yield return new WaitForSeconds (respawnPause);
+
+        Paused = false;
+
+    }
 
 }

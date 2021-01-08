@@ -127,3 +127,4 @@ MonoBehaviour:
   fallControl: 0.9
   deathHeight: 1
   spriteSizePerUnit: 0.05
+  respawnPause: 0.5
