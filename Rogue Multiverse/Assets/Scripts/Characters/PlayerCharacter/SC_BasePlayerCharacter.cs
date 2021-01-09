@@ -66,9 +66,9 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     }
 
-    protected virtual RaycastHit2D MovementCheck (Vector2 movement) {
+    protected virtual Collider2D MovementCheck (Vector2 movement) {
 
-        return Physics2D.BoxCast (transform.position, transform.lossyScale, 0, movement, movement.magnitude, LayerMask.GetMask ("Default"));
+        return Physics2D.BoxCast (transform.position, transform.lossyScale, 0, movement, movement.magnitude, LayerMask.GetMask ("Default")).collider;
 
     }
 
@@ -76,7 +76,7 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
         if (movement != Vector2.zero) {
 
-            if (!MovementCheck(movement).collider) {
+            if (!MovementCheck(movement)) {
 
                 transform.position += movement.V3 ();
 

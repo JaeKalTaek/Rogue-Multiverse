@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using static SC_Camera_Base;
+using static SC_BasePlayerCharacter;
 
 public class SC_GM_StreetFight : SC_GameManager {
 
@@ -11,6 +12,12 @@ public class SC_GM_StreetFight : SC_GameManager {
     [Header ("Sprites")]
     public List<SpriteRenderer> tiledSprites;
     public List<Sprite> buildings;
+
+    [Header ("Enemies")]
+    public Transform firstEnemiesSpawnPoints;
+    public List<GameObject> enemyPrefabs;
+
+    List<Transform> characters;
 
     protected override void Start () {
 
@@ -31,6 +38,18 @@ public class SC_GM_StreetFight : SC_GameManager {
             lastBuilding = newBuilding;
 
         } while (lastBuilding.transform.localPosition.x < levelLength * Cam.Width ());
+
+        characters = new List<Transform> () { Player.transform };
+
+        foreach (Transform t in firstEnemiesSpawnPoints)
+            characters.Add (Instantiate (enemyPrefabs[0], t.position, Quaternion.identity).transform);
+
+    }
+
+    void Update () {
+
+        foreach (Transform t in characters)
+            t.Set (null, null, t.position.y);
 
     }
 
