@@ -30,17 +30,16 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     }
 
-    protected virtual void Start () {
+    protected override void Start () {
+
+        base.Start ();
 
         if (Alignment != Alignments.None)
-            GetComponent<SpriteRenderer>().color = Alignment == Alignments.Superhero ? Color.green : (Alignment == Alignments.Villain ? Color.red : Color.cyan);
+            spriteR.color = Alignment == Alignments.Superhero ? Color.green : (Alignment == Alignments.Villain ? Color.red : Color.cyan);
 
     }
 
-    protected virtual void Update() {
-
-        if (CanInteract)
-            GetOver<SC_InteractableElement>("Interactable")?.Interact();
+    protected virtual void Update() {        
 
         if (!Paused) {
 
@@ -68,7 +67,7 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     protected virtual Collider2D MovementCheck (Vector2 movement) {
 
-        return Physics2D.BoxCast (transform.position, transform.lossyScale, 0, movement, movement.magnitude, LayerMask.GetMask ("Default")).collider;
+        return Physics2D.BoxCast (transform.position, collider.bounds.size, 0, movement, movement.magnitude, LayerMask.GetMask ("Default")).collider;
 
     }
 
@@ -94,11 +93,9 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     public T GetOver<T>(string id) where T : Behaviour {
 
-        return Physics2D.OverlapBox(transform.position, transform.lossyScale, 0, LayerMask.GetMask(id))?.GetComponent<T>();
+        return Physics2D.OverlapBox(transform.position, collider.bounds.size, 0, LayerMask.GetMask(id))?.GetComponent<T>();
 
     }
-
-    public virtual bool CanInteract { get { return Input.GetButtonDown("Submit"); } }
 
 }
 

@@ -12,8 +12,6 @@ public class SC_PC_HUB : SC_BasePlayerCharacter {
 
     bool Grounded { get { return Physics2D.Raycast(transform.position, Vector2.down, .57f, LayerMask.GetMask("Default")); } }
 
-    public override bool CanInteract => base.CanInteract && Grounded;
-
     protected override Vector2 XMovement => base.XMovement * (Grounded || (jumpTime >= 0) ? 1 : airControl);
 
     protected override void AdditionalMovement () {        
@@ -46,6 +44,15 @@ public class SC_PC_HUB : SC_BasePlayerCharacter {
 
         if (Move (movement))
             jumpTime = -1;
+
+    }
+
+    protected override void Update () {
+
+        base.Update ();
+
+        if (Input.GetButtonDown ("Submit") && Grounded)
+            GetOver<SC_InteractableElement> ("Interactable")?.Interact ();
 
     }
 
