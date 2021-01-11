@@ -93,7 +93,7 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     public T GetOver<T>(string id) where T : Behaviour {
 
-        return Physics2D.OverlapBox(transform.position, collider.bounds.size, 0, LayerMask.GetMask(id))?.GetComponent<T>();
+        return Physics2D.OverlapBox(ColliderPos, collider.bounds.size, 0, LayerMask.GetMask(id))?.GetComponent<T>();
 
     }
 

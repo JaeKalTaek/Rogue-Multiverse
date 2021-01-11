@@ -12,6 +12,8 @@ public class SC_BaseCharacter : MonoBehaviour {
 
     protected new Collider2D collider;
 
+    public Vector3 ColliderPos { get { return transform.position + Vector3.Scale (collider.offset, transform.lossyScale); } }
+
     protected virtual void Start () {
 
         animator = GetComponent<Animator> ();

@@ -10,14 +10,14 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
         base.Start ();
 
-        animator.SetFloat ("SimplePunchSpeed", simplePunchSpeed);        
+        animator.SetFloat ("SimplePunchSpeed", simplePunchSpeed);
 
     }
 
     protected override Collider2D MovementCheck (Vector2 movement) {
 
-        return Physics2D.BoxCast (transform.position + Vector3.up * .05f, new Vector2 (collider.bounds.size.x, .1f), 0, movement, movement.magnitude, LayerMask.GetMask ("Default")).collider ??
-            Physics2D.BoxCast (transform.position + Vector3.up * collider.bounds.size.y * .5f, collider.bounds.size * .5f, 0, movement, movement.magnitude, LayerMask.GetMask ("Enemy")).collider;
+        return Physics2D.BoxCast (new Vector3 (ColliderPos.x, transform.position.y + .1f), new Vector2 (collider.bounds.size.x, .2f), 0, movement, movement.magnitude, LayerMask.GetMask ("Default")).collider ??
+            Physics2D.BoxCast (new Vector3 (ColliderPos.x, transform.position.y + .1f), collider.bounds.size / 2, 0, movement, movement.magnitude, LayerMask.GetMask ("Enemy")).collider;
 
     }
 
@@ -26,6 +26,8 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
         Move (YMovement);
 
     }
+
+    IEnumerator punchCoroutine;
 
     protected override void Update () {
 
@@ -37,7 +39,8 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
                 animator.SetTrigger ("SimplePunch");
 
-                StartCoroutine (Punching ());
+                punchCoroutine = Punching ();
+                StartCoroutine (punchCoroutine);
 
             }
 
@@ -61,7 +64,7 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
         print ("PUNCHED");
 
-        StopCoroutine (Punching ());
+        StopCoroutine (punchCoroutine);
 
     }
 
