@@ -58,4 +58,13 @@ public static class SC_ExtensionMethods {
 
     }
 
+    public static ContactFilter2D GetFilter (string layer) {
+
+        ContactFilter2D c = new ContactFilter2D ();
+        c.SetLayerMask (LayerMask.GetMask (layer));
+        c.useTriggers = true;
+        return c;
+
+    }
+
 }

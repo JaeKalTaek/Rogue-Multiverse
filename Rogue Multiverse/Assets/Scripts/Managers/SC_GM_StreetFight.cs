@@ -48,8 +48,14 @@ public class SC_GM_StreetFight : SC_GameManager {
 
     void Update () {
 
-        foreach (Transform t in characters)
-            t.Set (null, null, t.position.y);
+        for (int i = 0; i < characters.Count; i++) {
+
+            if (!characters[i])
+                characters.RemoveAt (i);
+            else
+                characters[i].Set (null, null, characters[i].position.y);
+
+        }
 
     }
 

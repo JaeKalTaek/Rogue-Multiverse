@@ -718,6 +718,8 @@ MonoBehaviour:
   accelerationStrength: 1
   decelerationStrength: -1
   moveSpeed: 6
+  simplePunchCollider: {fileID: 7684613307485031261}
+  simplePunchDamage: 10
   simplePunchSpeed: 2
 --- !u!61 &3312858064699279023
 BoxCollider2D:

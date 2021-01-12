@@ -3,8 +3,8 @@
 public class SC_BaseCharacter : MonoBehaviour {
 
     [Header ("Base character variables")]
-    public float baseHealth;
-    public float Health { get; set; }
+    public int baseHealth;
+    public int Health { get; set; }
 
     protected Animator animator;
 
@@ -23,6 +23,15 @@ public class SC_BaseCharacter : MonoBehaviour {
         collider = GetComponent<Collider2D> ();
 
         Health = baseHealth;
+
+    }
+
+    public void Hit (int damage) {
+
+        Health -= damage;
+
+        if (Health <= 0)
+            Destroy (gameObject);
 
     }
 

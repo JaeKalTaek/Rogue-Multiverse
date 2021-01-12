@@ -1,10 +1,13 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
     [Header ("Street Fight PC variables")]
-    public float simplePunchSpeed;
+    public Collider2D simplePunchCollider;
+    public int simplePunchDamage;
+    public float simplePunchSpeed;    
 
     protected override void Start () {
 
@@ -31,7 +34,11 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
     protected override void Update () {
 
+        Vector3 prevPos = transform.position;
+
         base.Update ();
+
+        animator.SetBool ("Walking", Vector3.Distance (prevPos, transform.position) > 0);
 
         if (!Paused) {
 
@@ -50,19 +57,32 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
     IEnumerator Punching () {
 
+        List<Collider2D> hits = new List<Collider2D> ();
+
         while (true) {
+             
+            List<Collider2D> results = new List<Collider2D> ();
+            simplePunchCollider.OverlapCollider (SC_ExtensionMethods.GetFilter ("EnemyHitbox"), results);
+
+            foreach (Collider2D c in results) {
+
+                if (!hits.Contains (c)) {
+
+                    c.GetComponentInParent<SC_BaseCharacter> ()?.Hit (simplePunchDamage);
+
+                    hits.Add (c);
+
+                }
+
+            }
 
             yield return new WaitForSeconds (Time.deltaTime);
-
-            print ("PUNCHING");
 
         }
 
     }
 
     public void SimplePunched () {
-
-        print ("PUNCHED");
 
         StopCoroutine (punchCoroutine);
 
