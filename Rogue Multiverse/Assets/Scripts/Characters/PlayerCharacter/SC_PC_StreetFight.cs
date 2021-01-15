@@ -1,10 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
+    [Serializable]
+    public struct AttackMapping {
+
+        public string input;
+        public string attack;
+
+    }
+
     [Header ("Street Fight PC variables")]
+    public AttackMapping[] attacksMapping;
+
+    [Header("Simple Punch variables")]
     public Collider2D simplePunchCollider;
     public int simplePunchDamage;
     public float simplePunchSpeed;    
@@ -30,7 +42,7 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
     }
 
-    IEnumerator punchCoroutine;
+    SC_StreetFight_Attack currentAttack;
 
     protected override void Update () {
 
@@ -42,49 +54,23 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
         if (!Paused) {
 
-            if (Input.GetButtonDown ("Submit")) {
-
-                animator.SetTrigger ("SimplePunch");
-
-                punchCoroutine = Punching ();
-                StartCoroutine (punchCoroutine);
-
-            }
+            foreach (AttackMapping am in attacksMapping)
+                if (!currentAttack && Input.GetButtonDown (am.input))
+                    currentAttack = SC_StreetFight_Attack.StartAttack (gameObject, am.attack);
 
         }
 
     }
 
-    IEnumerator Punching () {
+    public void StopAttack () {
 
-        List<Collider2D> hits = new List<Collider2D> ();
-
-        while (true) {
-             
-            List<Collider2D> results = new List<Collider2D> ();
-            simplePunchCollider.OverlapCollider (SC_ExtensionMethods.GetFilter ("EnemyHitbox"), results);
-
-            foreach (Collider2D c in results) {
-
-                if (!hits.Contains (c)) {
-
-                    c.GetComponentInParent<SC_BaseCharacter> ()?.Hit (simplePunchDamage);
-
-                    hits.Add (c);
-
-                }
-
-            }
-
-            yield return new WaitForSeconds (Time.deltaTime);
-
-        }
+        currentAttack.Stop ();
 
     }
 
-    public void SimplePunched () {
+    public void EndAttack () {
 
-        StopCoroutine (punchCoroutine);
+        Destroy (currentAttack);
 
     }
 

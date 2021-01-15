@@ -1,0 +1,65 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SC_StreetFight_Attack : MonoBehaviour {
+
+    MonoBehaviour user;
+    string attack;
+
+    IEnumerator coroutine;
+
+    public static SC_StreetFight_Attack StartAttack (GameObject g, string a) {
+
+        SC_StreetFight_Attack newAttack = g.AddComponent<SC_StreetFight_Attack> ();
+        newAttack.StartAttack (a);
+        return newAttack;
+
+    }
+
+    void StartAttack (string a) {
+
+        user = gameObject.GetComponent<SC_BaseCharacter> ();
+        attack = a;
+
+        user.GetComponent<Animator> ().SetTrigger (attack);
+
+        coroutine = Attack ();
+        StartCoroutine (coroutine);
+
+    }
+
+    IEnumerator Attack () {
+
+        List<Collider2D> hits = new List<Collider2D> ();
+
+        while (true) {
+
+            List<Collider2D> results = new List<Collider2D> ();
+            (user.GetType ().GetField (attack + "Collider").GetValue (user) as Collider2D).OverlapCollider (SC_ExtensionMethods.GetFilter ("EnemyHitbox"), results);
+
+            foreach (Collider2D c in results) {
+
+                if (!hits.Contains (c)) {
+
+                    c.GetComponentInParent<SC_BaseCharacter> ()?.Hit (user.GetType ().GetField (attack + "Damage").GetValue (user) as int? ?? 0);
+
+                    hits.Add (c);
+
+                }
+
+            }
+
+            yield return new WaitForSeconds (Time.deltaTime);
+
+        }
+
+    }
+
+    public void Stop () {
+
+        StopCoroutine (coroutine);
+
+    }
+
+}
