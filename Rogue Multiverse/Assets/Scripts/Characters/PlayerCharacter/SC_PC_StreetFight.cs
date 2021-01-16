@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using static SC_StreetFight_Attack;
 
 public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
@@ -14,15 +15,7 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
     [Header ("Street Fight PC variables")]
     public AttackMapping[] attacksMapping;
 
-    public SC_StreetFight_Attack.BaseAttackVariables simplePunch;
-
-    protected override void Start () {
-
-        base.Start ();
-
-        animator.SetFloat ("SimplePunchSpeed", simplePunch.speed);
-
-    }
+    public BaseAttackVariables simplePunch, simpleKick;
 
     protected override Collider2D MovementCheck (Vector2 movement) {
 
@@ -51,7 +44,7 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
             foreach (AttackMapping am in attacksMapping)
                 if (!currentAttack && Input.GetButtonDown (am.input))
-                    currentAttack = SC_StreetFight_Attack.StartAttack (gameObject, am.attack);
+                    currentAttack = StartAttack (gameObject, am.attack);
 
         }
 

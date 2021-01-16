@@ -19,6 +19,8 @@ public class SC_StreetFight_Attack : MonoBehaviour {
 
     IEnumerator coroutine;
 
+    BaseAttackVariables GetValues { get { return (BaseAttackVariables) user.GetType ().GetField (attack).GetValue (user); } }
+
     public static SC_StreetFight_Attack StartAttack (GameObject g, string a) {
 
         SC_StreetFight_Attack newAttack = g.AddComponent<SC_StreetFight_Attack> ();
@@ -32,6 +34,7 @@ public class SC_StreetFight_Attack : MonoBehaviour {
         user = gameObject.GetComponent<SC_BaseCharacter> ();
         attack = a;
 
+        user.GetComponent<Animator> ().SetFloat (attack + "Speed", GetValues.speed);
         user.GetComponent<Animator> ().SetTrigger (attack);
 
         coroutine = Attack ();
@@ -46,13 +49,13 @@ public class SC_StreetFight_Attack : MonoBehaviour {
         while (true) {
 
             List<Collider2D> results = new List<Collider2D> ();
-            ((BaseAttackVariables)user.GetType ().GetField (attack).GetValue (user)).collider.OverlapCollider (SC_ExtensionMethods.GetFilter ("EnemyHitbox"), results);
+            GetValues.collider.OverlapCollider (SC_ExtensionMethods.GetFilter ("EnemyHitbox"), results);
 
             foreach (Collider2D c in results) {
 
                 if (!hits.Contains (c)) {
 
-                    c.GetComponentInParent<SC_BaseCharacter> ()?.Hit (((BaseAttackVariables) user.GetType ().GetField (attack).GetValue (user)).damage);
+                    c.GetComponentInParent<SC_BaseCharacter> ()?.Hit (GetValues.damage);
 
                     hits.Add (c);
 

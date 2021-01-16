@@ -779,10 +779,16 @@ MonoBehaviour:
   attacksMapping:
   - input: Submit
     attack: simplePunch
+  - input: SecondaryAction
+    attack: simpleKick
   simplePunch:
     collider: {fileID: 7684613307485031261}
     damage: 10
     speed: 2
+  simpleKick:
+    collider: {fileID: 4524321708970977344}
+    damage: 15
+    speed: 1
 --- !u!61 &3312858064699279023
 BoxCollider2D:
   m_ObjectHideFlags: 0
