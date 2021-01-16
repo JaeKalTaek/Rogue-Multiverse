@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SC_PC_StreetFight : SC_BasePlayerCharacter {
@@ -16,16 +14,13 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
     [Header ("Street Fight PC variables")]
     public AttackMapping[] attacksMapping;
 
-    [Header("Simple Punch variables")]
-    public Collider2D simplePunchCollider;
-    public int simplePunchDamage;
-    public float simplePunchSpeed;    
+    public SC_StreetFight_Attack.BaseAttackVariables simplePunch;
 
     protected override void Start () {
 
         base.Start ();
 
-        animator.SetFloat ("SimplePunchSpeed", simplePunchSpeed);
+        animator.SetFloat ("SimplePunchSpeed", simplePunch.speed);
 
     }
 

@@ -1,8 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SC_StreetFight_Attack : MonoBehaviour {
+
+    [Serializable]
+    public struct BaseAttackVariables {
+
+        public Collider2D collider;
+        public int damage;
+        public float speed;
+
+    }
 
     MonoBehaviour user;
     string attack;
@@ -36,13 +46,13 @@ public class SC_StreetFight_Attack : MonoBehaviour {
         while (true) {
 
             List<Collider2D> results = new List<Collider2D> ();
-            (user.GetType ().GetField (attack + "Collider").GetValue (user) as Collider2D).OverlapCollider (SC_ExtensionMethods.GetFilter ("EnemyHitbox"), results);
+            ((BaseAttackVariables)user.GetType ().GetField (attack).GetValue (user)).collider.OverlapCollider (SC_ExtensionMethods.GetFilter ("EnemyHitbox"), results);
 
             foreach (Collider2D c in results) {
 
                 if (!hits.Contains (c)) {
 
-                    c.GetComponentInParent<SC_BaseCharacter> ()?.Hit (user.GetType ().GetField (attack + "Damage").GetValue (user) as int? ?? 0);
+                    c.GetComponentInParent<SC_BaseCharacter> ()?.Hit (((BaseAttackVariables) user.GetType ().GetField (attack).GetValue (user)).damage);
 
                     hits.Add (c);
 
