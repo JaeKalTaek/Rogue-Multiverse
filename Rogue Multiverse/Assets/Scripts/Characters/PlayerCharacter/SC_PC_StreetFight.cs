@@ -15,7 +15,14 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
     [Header ("Street Fight PC variables")]
     public AttackMapping[] attacksMapping;
 
-    public BaseAttackVariables simplePunch, simpleKick;
+    public BaseAttackVariables simplePunch, simpleKick, comboPunch;
+
+    [Header ("Punch combo variables")]
+    public float comboTime;
+    float comboTimer;
+
+    public int comboHitsNeeded;
+    int comboHits;
 
     protected override Collider2D MovementCheck (Vector2 movement) {
 
@@ -38,15 +45,37 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
         base.Update ();
 
-        animator.SetBool ("Walking", Vector3.Distance (prevPos, transform.position) > 0);
+        animator.SetBool ("Walking", Vector3.Distance (prevPos, transform.position) > 0);        
 
-        if (!Paused) {
+        if (!Paused && !currentAttack) {
 
-            foreach (AttackMapping am in attacksMapping)
-                if (!currentAttack && Input.GetButtonDown (am.input))
-                    currentAttack = StartAttack (gameObject, am.attack);
+            comboTimer += comboHits == 0 ? 0 : Time.deltaTime;
 
-        }
+            foreach (AttackMapping am in attacksMapping) {
+
+                if (Input.GetButtonDown (am.input)) {                    
+
+                    if (am.attack == "simplePunch") {                        
+
+                        comboHits = comboTimer <= comboTime ? (comboHits >= comboHitsNeeded ? 0 : comboHits + 1) : 1;
+
+                        currentAttack = StartAttack (gameObject, comboHits == 0 ? "comboPunch" : am.attack);
+
+                    } else {
+
+                        comboHits = 0;
+
+                        currentAttack = StartAttack (gameObject, am.attack);
+
+                    }
+
+                    comboTimer = 0;
+
+                }               
+
+            }
+
+        }        
 
     }
 

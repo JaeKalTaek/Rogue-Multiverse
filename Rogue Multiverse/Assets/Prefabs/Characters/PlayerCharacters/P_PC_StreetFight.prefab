@@ -788,7 +788,13 @@ MonoBehaviour:
   simpleKick:
     collider: {fileID: 4524321708970977344}
     damage: 15
-    speed: 1
+    speed: 1.5
+  comboPunch:
+    collider: {fileID: 7684613307485031261}
+    damage: 30
+    speed: 1.5
+  comboTime: 1
+  comboHitsNeeded: 2
 --- !u!61 &3312858064699279023
 BoxCollider2D:
   m_ObjectHideFlags: 0
