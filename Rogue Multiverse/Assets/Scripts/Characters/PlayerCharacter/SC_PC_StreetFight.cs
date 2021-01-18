@@ -24,6 +24,8 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
     public int comboHitsNeeded;
     int comboHits;
 
+    SC_StreetFight_Attack currentAttack;
+
     protected override Collider2D MovementCheck (Vector2 movement) {
         
         return SC_GM_StreetFight.MovementCheck (this, movement);
@@ -34,9 +36,7 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
         Move (YMovement);
 
-    }
-
-    SC_StreetFight_Attack currentAttack;
+    }    
 
     protected override void Update () {
 
@@ -80,13 +80,13 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
     public void StopAttack () {
 
-        currentAttack.Stop ();
+        currentAttack.State = AttackState.Ending;
 
     }
 
     public void EndAttack () {
 
-        Destroy (currentAttack);
+        currentAttack.State = AttackState.Cooldown;
 
     }
 

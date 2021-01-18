@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using static SC_BasePlayerCharacter;
+using static SC_StreetFight_Attack;
 
 public class SC_StreetFightEnemy_Base : SC_BaseCharacter {
 
-    //[Header ("Base Street Fight enemy variables")]   
+    [Header ("Base Street Fight enemy variables")]
+    public BaseAttackVariables simplePunch;
+
+    SC_StreetFight_Attack currentAttack;
 
     protected static List<SC_StreetFightEnemy_Base> enemies;
 
@@ -23,19 +27,39 @@ public class SC_StreetFightEnemy_Base : SC_BaseCharacter {
 
         foreach (SC_StreetFightEnemy_Base e in enemies) {
 
-            if (e) {
+            if (e && !Player.Paused && !e.currentAttack) {
 
                 Vector2 movement = (Player.transform.position - e.transform.position).normalized * e.moveSpeed * Time.deltaTime;
 
-                if (!Player.Paused && !SC_GM_StreetFight.MovementCheck (e, movement)) {
+                Collider2D c = SC_GM_StreetFight.MovementCheck (e, movement);
+
+                e.animator.SetBool ("Walking", !c);
+
+                if (!c) {
 
                     e.transform.position += movement.V3 ();
+
+                } else if (c.GetComponentInParent<SC_BasePlayerCharacter> ()) {
+
+                    e.currentAttack = StartAttack (e.gameObject, "simplePunch");
 
                 }
 
             }
 
         }
+
+    }
+
+    public void StopAttack () {
+
+        currentAttack.State = AttackState.Ending;
+
+    }
+
+    public void EndAttack () {
+
+        currentAttack.State = AttackState.Cooldown;
 
     }
 

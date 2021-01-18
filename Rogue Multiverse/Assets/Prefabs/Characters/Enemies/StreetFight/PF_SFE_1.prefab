@@ -148,6 +148,63 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.21845463, y: 0.5944912}
   m_EdgeRadius: 0
+--- !u!1 &852595959099966432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1219675393575520478}
+  - component: {fileID: 2954870654498593960}
+  m_Layer: 2
+  m_Name: Left_Hand_Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1219675393575520478
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852595959099966432}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4822897068683088509}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &2954870654498593960
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852595959099966432}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1}
+  m_EdgeRadius: 0
 --- !u!1 &2563783495263002778
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +446,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0.21161191, w: 0.9773538}
   m_LocalPosition: {x: 0.026649548, y: 0.0000000070364834, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1219675393575520478}
   m_Father: {fileID: 939973232905817642}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -591,6 +649,7 @@ GameObject:
   - component: {fileID: 9032476566844266737}
   - component: {fileID: 1065847152799863027}
   - component: {fileID: 4292381527088923541}
+  - component: {fileID: 5271824831262659705}
   m_Layer: 11
   m_Name: PF_SFE_1
   m_TagString: Untagged
@@ -683,6 +742,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseHealth: 25
   moveSpeed: 3
+  simplePunch:
+    collider: {fileID: 2954870654498593960}
+    damage: 10
+    speed: 1
+    cooldown: 1
 --- !u!61 &1065847152799863027
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -746,6 +810,25 @@ MonoBehaviour:
     m_Extent: {x: 0.26637143, y: 0.4282788, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
+--- !u!95 &5271824831262659705
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8900818449216278759}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2fe056259bc152b4fbfdfa193ae43bac, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &9183913591199137621
 GameObject:
   m_ObjectHideFlags: 0

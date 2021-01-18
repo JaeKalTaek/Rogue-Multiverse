@@ -11,13 +11,18 @@ public class SC_StreetFight_Attack : MonoBehaviour {
         public Collider2D collider;
         public int damage;
         public float speed;
+        public float cooldown;
 
     }
+
+    public enum AttackState { Ongoing, Ending, Cooldown }
 
     MonoBehaviour user;
     string attack;
 
     IEnumerator coroutine;
+
+    public AttackState State { get; set; }
 
     BaseAttackVariables GetValues { get { return (BaseAttackVariables) user.GetType ().GetField (attack).GetValue (user); } }
 
@@ -46,7 +51,7 @@ public class SC_StreetFight_Attack : MonoBehaviour {
 
         List<Collider2D> hits = new List<Collider2D> ();
 
-        while (true) {
+        while (State == AttackState.Ongoing) {
 
             List<Collider2D> results = new List<Collider2D> ();
             GetValues.collider.OverlapCollider (SC_ExtensionMethods.GetFilter ("EnemyHitbox"), results);
@@ -67,11 +72,11 @@ public class SC_StreetFight_Attack : MonoBehaviour {
 
         }
 
-    }
+        while (State == AttackState.Ending) yield return null;
 
-    public void Stop () {
+        yield return new WaitForSeconds (GetValues.cooldown);
 
-        StopCoroutine (coroutine);
+        Destroy (this);
 
     }
 
