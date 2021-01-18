@@ -25,9 +25,8 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
     int comboHits;
 
     protected override Collider2D MovementCheck (Vector2 movement) {
-
-        return Physics2D.BoxCast (new Vector3 (ColliderPos.x, transform.position.y + .1f), new Vector2 (collider.bounds.size.x, .2f), 0, movement, movement.magnitude, LayerMask.GetMask ("Default")).collider ??
-            Physics2D.BoxCast (new Vector3 (ColliderPos.x, transform.position.y + .1f), collider.bounds.size / 2, 0, movement, movement.magnitude, LayerMask.GetMask ("Enemy")).collider;
+        
+        return SC_GM_StreetFight.MovementCheck (this, movement);
 
     }
 

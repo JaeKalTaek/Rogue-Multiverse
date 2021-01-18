@@ -11,8 +11,7 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     [Header ("Tweakable")]
     public float accelerationTime;
-    public float accelerationStrength, decelerationStrength;
-    public float moveSpeed;
+    public float accelerationStrength, decelerationStrength;    
 
     protected float horizontalAcceleration, verticalAcceleration;
 
@@ -67,7 +66,7 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     protected virtual Collider2D MovementCheck (Vector2 movement) {
 
-        return Physics2D.BoxCast (transform.position, collider.bounds.size, 0, movement, movement.magnitude, LayerMask.GetMask ("Default")).collider;
+        return Physics2D.BoxCast (transform.position, Collider.bounds.size, 0, movement, movement.magnitude, LayerMask.GetMask ("Default")).collider;
 
     }
 
@@ -93,7 +92,7 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     public T GetOver<T>(string id) where T : Behaviour {
 
-        return Physics2D.OverlapBox(ColliderPos, collider.bounds.size, 0, LayerMask.GetMask(id))?.GetComponent<T>();
+        return Physics2D.OverlapBox(ColliderPos, Collider.bounds.size, 0, LayerMask.GetMask(id))?.GetComponent<T>();
 
     }
 

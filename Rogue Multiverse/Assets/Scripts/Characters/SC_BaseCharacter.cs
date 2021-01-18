@@ -6,13 +6,15 @@ public class SC_BaseCharacter : MonoBehaviour {
     public int baseHealth;
     public int Health { get; set; }
 
+    public float moveSpeed;
+
     protected Animator animator;
 
     protected SpriteRenderer spriteR;
 
-    protected new Collider2D collider;
+    public Collider2D Collider { get; set; }
 
-    public Vector3 ColliderPos { get { return transform.position + Vector3.Scale (collider.offset, transform.lossyScale); } }
+    public Vector3 ColliderPos { get { return transform.position + Vector3.Scale (Collider.offset, transform.lossyScale); } }
 
     protected virtual void Start () {
 
@@ -20,7 +22,7 @@ public class SC_BaseCharacter : MonoBehaviour {
 
         spriteR = GetComponent<SpriteRenderer> ();
 
-        collider = GetComponent<Collider2D> ();
+        Collider = GetComponent<Collider2D> ();
 
         Health = baseHealth;
 

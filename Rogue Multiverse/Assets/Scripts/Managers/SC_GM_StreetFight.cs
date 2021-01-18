@@ -57,6 +57,21 @@ public class SC_GM_StreetFight : SC_GameManager {
 
         }
 
+        SC_StreetFightEnemy_Base.UpdateEnemies ();
+
+    }
+
+    public static Collider2D MovementCheck (SC_BaseCharacter c, Vector2 movement) {
+
+        RaycastHit2D[] charas = Physics2D.BoxCastAll (c.ColliderPos, c.Collider.bounds.size, 0, movement, movement.magnitude, LayerMask.GetMask (new string[] { "Enemy", "Player" }));
+
+        Collider2D charaHit = null;
+
+        foreach (RaycastHit2D ch in charas)
+            charaHit = ch.collider.GetComponentInParent<SC_BaseCharacter> () == c ? charaHit : ch.collider;
+
+        return Physics2D.BoxCast (new Vector3 (c.ColliderPos.x, c.transform.position.y + .1f), new Vector2 (c.Collider.bounds.size.x * 2, .2f), 0, movement, movement.magnitude, LayerMask.GetMask ("Default")).collider ?? charaHit;
+
     }
 
 }
