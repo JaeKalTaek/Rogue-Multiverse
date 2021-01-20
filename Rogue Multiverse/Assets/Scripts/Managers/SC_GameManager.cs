@@ -28,17 +28,10 @@ public class SC_GameManager : MonoBehaviour {
 
     public string HUBmessage { get; set; }
 
-    public int baseLives;
-    int lives;
-
-    public TextMeshProUGUI livesText;
-
     public GameObject tutorial;
     public float tutorialDuration;
 
     protected virtual void Start() {
-
-        lives = baseLives;
 
         GM = this;
 
@@ -66,13 +59,8 @@ public class SC_GameManager : MonoBehaviour {
 
         }
 
-        if (lives > 0) {
-
+        if (GetType () != typeof (SC_GM_HUB))
             DontDestroyOnLoad(this);
-
-            livesText.text = "Lives: " + baseLives;
-
-        }
 
     }
 
@@ -86,20 +74,11 @@ public class SC_GameManager : MonoBehaviour {
         
     }
 
-    public bool Fail () {
+    public void Fail () {
 
-        lives--;
+        HUBmessage = "You failed the scenario";
 
-        if (lives < 0) {
-
-            HUBmessage = "You failed the scenario";
-
-            SceneManager.LoadScene("HUB");
-
-        } else
-            livesText.text = "Lives: " + lives;
-
-        return lives < 0;
+        SceneManager.LoadScene("HUB");
 
     }    
 

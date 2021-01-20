@@ -79,15 +79,19 @@ public class SC_PC_RoofsChase : SC_BasePlayerCharacter {
 
                 transform.Set(null, null, Mathf.Min(under?.transform.position.z ?? deathHeight, transform.position.z + gravity * Time.deltaTime));
 
-                if (transform.position.z >= deathHeight && !GM.Fail()) {
+                if (transform.position.z >= deathHeight) {
 
-                    transform.position = checkpoint?.SpawnPos ?? GM.playerSpawnPoint.position;
+                    GM.Fail ();
+
+                    return;
+
+                    /*transform.position = checkpoint?.SpawnPos ?? GM.playerSpawnPoint.position;
 
                     Cam.GetComponent<SC_Camera_RoofsChase>().Respawned(baseCamDistance);
 
                     Paused = true;
 
-                    StartCoroutine (RespawnPause ());
+                    StartCoroutine (RespawnPause ());*/
 
                 }
 
@@ -112,12 +116,12 @@ public class SC_PC_RoofsChase : SC_BasePlayerCharacter {
 
     }    
 
-    IEnumerator RespawnPause () {
+    /*IEnumerator RespawnPause () {
 
         yield return new WaitForSeconds (respawnPause);
 
         Paused = false;
 
-    }
+    }*/
 
 }

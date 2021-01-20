@@ -19,13 +19,13 @@ public class SC_Camera_RoofsChase : SC_Camera_Base {
 
     }
 
-    public void Respawned (float baseCamDistance) {
+    /*public void Respawned (float baseCamDistance) {
 
         if (PlayerHeight < 0.1f)
             transform.Set(null, Player.transform.position.y + baseCamDistance, null);
         else if (PlayerHeight > .9f)
             transform.position += Vector3.up * Cam.ViewportToWorldPoint(Vector3.up * (PlayerHeight - percentageScreenToMove - .1f)).y * 2;
 
-    }
+    }*/
 
 }
