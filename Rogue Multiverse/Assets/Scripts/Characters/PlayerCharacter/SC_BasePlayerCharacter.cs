@@ -11,11 +11,11 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     [Header ("Tweakable")]
     public float accelerationTime;
-    public float accelerationStrength, decelerationStrength;    
+    public float accelerationStrength, decelerationStrength;
 
     protected float horizontalAcceleration, verticalAcceleration;
 
-    protected virtual Vector2 XMovement { get { return (Vector2.right * Input.GetAxis ("Horizontal") * (accelerationTime == 0 ? moveSpeed : Mathf.Lerp(0, moveSpeed, horizontalAcceleration / accelerationTime)) * Time.deltaTime); } }
+    protected virtual Vector2 XMovement { get { return (Vector2.right * Input.GetAxis ("Horizontal") * (accelerationTime == 0 ? moveSpeed : Mathf.Lerp (0, moveSpeed, horizontalAcceleration / accelerationTime)) * Time.deltaTime); } }
 
     protected virtual Vector2 YMovement { get { return Vector2.up * Input.GetAxis ("Vertical") * (accelerationTime == 0 ? moveSpeed : Mathf.Lerp (0, moveSpeed, verticalAcceleration / accelerationTime)) * Time.deltaTime; } }
 
@@ -23,9 +23,9 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     protected SC_Checkpoint checkpoint;
 
-    protected void Awake() {
+    protected void Awake () {
 
-        Player = this;        
+        Player = this;
 
     }
 
@@ -38,21 +38,21 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     }
 
-    protected virtual void Update() {        
+    protected virtual void Update () {
 
         if (!Paused) {
 
-            horizontalAcceleration = Mathf.Clamp(horizontalAcceleration + Time.deltaTime * (Input.GetAxis("Horizontal") != 0 ? accelerationStrength : decelerationStrength), 0, accelerationTime);
+            horizontalAcceleration = Mathf.Clamp (horizontalAcceleration + Time.deltaTime * (Input.GetAxis ("Horizontal") != 0 ? accelerationStrength : decelerationStrength), 0, accelerationTime);
 
             verticalAcceleration = Mathf.Clamp (verticalAcceleration + Time.deltaTime * (Input.GetAxis ("Vertical") != 0 ? accelerationStrength : decelerationStrength), 0, accelerationTime);
 
             Move (XMovement);
 
-            AdditionalMovement();
+            AdditionalMovement ();
 
         }
 
-        checkpoint = GetOver<SC_Checkpoint>("Checkpoint") ?? checkpoint;
+        checkpoint = GetOver<SC_Checkpoint> ("Checkpoint") ?? checkpoint;
 
     }
 
@@ -60,7 +60,7 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
         Paused = true;
 
-        SceneManager.LoadScene("HUB");
+        SceneManager.LoadScene ("HUB");
 
     }
 
@@ -70,11 +70,11 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     }
 
-    protected virtual bool Move(Vector2 movement) {
+    protected virtual bool Move (Vector2 movement) {
 
         if (movement != Vector2.zero) {
 
-            if (!MovementCheck(movement)) {
+            if (!MovementCheck (movement)) {
 
                 transform.position += movement.V3 ();
 
@@ -88,11 +88,17 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     }
 
-    protected abstract void AdditionalMovement();
+    protected abstract void AdditionalMovement ();
 
-    public T GetOver<T>(string id) where T : Behaviour {
+    public T GetOver<T> (string id) where T : Behaviour {
 
-        return Physics2D.OverlapBox(ColliderPos, Collider.bounds.size, 0, LayerMask.GetMask(id))?.GetComponent<T>();
+        return Physics2D.OverlapBox (ColliderPos, Collider.bounds.size, 0, LayerMask.GetMask (id))?.GetComponent<T> ();
+
+    }
+
+    void OnDestroy () {
+
+        SC_GameManager.GM.Fail ();
 
     }
 
