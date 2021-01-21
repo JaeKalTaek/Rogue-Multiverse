@@ -51,8 +51,14 @@ public class SC_PC_HUB : SC_BasePlayerCharacter {
 
         base.Update ();
 
-        if (Input.GetButtonDown ("Submit") && Grounded)
-            GetOver<SC_InteractableElement> ("Interactable")?.Interact ();
+        if (Grounded) {
+
+            if (Input.GetButtonDown ("Submit"))
+                GetOver<SC_InteractableElement> ("Interactable")?.Interact ();
+            else if (!Paused && Input.GetButtonDown ("Teleport"))
+                SC_Teleporter.teleporter.Teleport ();
+
+        }
 
     }
 

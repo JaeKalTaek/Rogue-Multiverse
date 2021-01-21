@@ -2577,7 +2577,10 @@ MonoBehaviour:
 
     Jump - Spacebar
 
-    Interact - E'
+    Interact - E
+
+    Teleport
+    immediately - T'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2710,8 +2713,6 @@ MonoBehaviour:
   playerPrefab: {fileID: 700681686349156771, guid: ddcecaeec824f544c8f38091c2a52c7b,
     type: 3}
   alignmentTexts: []
-  baseLives: 0
-  livesText: {fileID: 0}
   tutorial: {fileID: 1079404027}
   tutorialDuration: 2
 --- !u!4 &1165447764

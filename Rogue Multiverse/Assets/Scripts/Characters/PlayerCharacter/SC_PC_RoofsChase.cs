@@ -81,7 +81,7 @@ public class SC_PC_RoofsChase : SC_BasePlayerCharacter {
 
                 if (transform.position.z >= deathHeight) {
 
-                    Destroy (this);
+                    GM.Fail ();
 
                     return;
 

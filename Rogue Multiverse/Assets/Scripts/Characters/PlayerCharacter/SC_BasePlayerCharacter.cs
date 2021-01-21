@@ -96,11 +96,5 @@ public abstract class SC_BasePlayerCharacter : SC_BaseCharacter {
 
     }
 
-    void OnDestroy () {
-
-        SC_GameManager.GM.Fail ();
-
-    }
-
 }
 

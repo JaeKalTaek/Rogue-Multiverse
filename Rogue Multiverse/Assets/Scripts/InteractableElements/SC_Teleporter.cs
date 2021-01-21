@@ -10,6 +10,14 @@ public class SC_Teleporter : SC_InteractableElement {
 
     bool close;
 
+    public static SC_Teleporter teleporter;
+
+    void Start () {
+
+        teleporter = this;
+
+    }
+
     public override void Interact () {
 
         if (!Player.Paused) {
