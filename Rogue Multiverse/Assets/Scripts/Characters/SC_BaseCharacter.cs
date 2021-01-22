@@ -4,7 +4,7 @@ public class SC_BaseCharacter : MonoBehaviour {
 
     [Header ("Base character variables")]
     public int baseHealth;
-    public int Health { get; set; }
+    public virtual int Health { get; set; }
 
     public float moveSpeed;
 

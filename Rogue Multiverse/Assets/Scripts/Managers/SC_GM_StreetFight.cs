@@ -2,6 +2,7 @@
 using UnityEngine;
 using static SC_Camera_Base;
 using static SC_BasePlayerCharacter;
+using UnityEngine.UI;
 
 public class SC_GM_StreetFight : SC_GameManager {
 
@@ -16,6 +17,9 @@ public class SC_GM_StreetFight : SC_GameManager {
     [Header ("Enemies")]
     public Transform firstEnemiesSpawnPoints;
     public List<GameObject> enemyPrefabs;
+
+    [Header ("UI")]
+    public Image healthBar;
 
     List<Transform> characters;
 
@@ -71,6 +75,13 @@ public class SC_GM_StreetFight : SC_GameManager {
             charaHit = ch.collider.GetComponentInParent<SC_BaseCharacter> () == c ? charaHit : ch.collider;
 
         return Physics2D.BoxCast (new Vector3 (c.ColliderPos.x, c.transform.position.y + .1f), new Vector2 (c.Collider.bounds.size.x * 2, .2f), 0, movement, movement.magnitude, LayerMask.GetMask ("Default")).collider ?? charaHit;
+
+    }
+
+    public void SetHealth () {
+
+        healthBar.transform.localScale = new Vector3 ((float)Player.Health / Player.baseHealth, 1, 1);
+        healthBar.color = Color.Lerp (Color.red, Color.green, (float) Player.Health / Player.baseHealth);
 
     }
 

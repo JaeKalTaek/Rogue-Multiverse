@@ -54,7 +54,7 @@ public class SC_StreetFight_Attack : MonoBehaviour {
         while (State == AttackState.Ongoing) {
 
             List<Collider2D> results = new List<Collider2D> ();
-            GetValues.collider.OverlapCollider (SC_ExtensionMethods.GetFilter ("EnemyHitbox"), results);
+            GetValues.collider.OverlapCollider (SC_ExtensionMethods.GetFilter ((user as SC_StreetFightEnemy_Base ? "Player" : "Enemy") + "Hitbox"), results);
 
             foreach (Collider2D c in results) {
 

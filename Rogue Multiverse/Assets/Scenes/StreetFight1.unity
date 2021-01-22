@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 229759526}
   - component: {fileID: 229759525}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1213,8 +1213,6 @@ MonoBehaviour:
   - alignment: 3
     tutorial: You're an antihero, just beat people up it's what you do!
     successMessage: Yay 3
-  baseLives: 2
-  livesText: {fileID: 0}
   tutorial: {fileID: 189551293}
   tutorialDuration: 2
   levelLength: 2
@@ -1243,6 +1241,7 @@ MonoBehaviour:
   firstEnemiesSpawnPoints: {fileID: 1268161408}
   enemyPrefabs:
   - {fileID: 8900818449216278759, guid: f83cc8eb909acb442805c6a54300b76d, type: 3}
+  healthBar: {fileID: 229759525}
 --- !u!1 &1268161407
 GameObject:
   m_ObjectHideFlags: 0

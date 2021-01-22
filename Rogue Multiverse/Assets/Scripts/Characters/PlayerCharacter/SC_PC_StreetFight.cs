@@ -26,6 +26,21 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
     SC_StreetFight_Attack currentAttack;
 
+    SC_GM_StreetFight GM { get { return SC_GameManager.GM as SC_GM_StreetFight; } }
+
+    public override int Health {
+
+        get => base.Health;
+
+        set {
+
+            base.Health = value;
+
+            GM.SetHealth ();
+
+        }
+    }
+
     protected override Collider2D MovementCheck (Vector2 movement) {
         
         return SC_GM_StreetFight.MovementCheck (this, movement);
@@ -36,7 +51,15 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
         Move (YMovement);
 
-    }    
+    }
+
+    protected override void Start () {
+
+        base.Start ();
+
+        GM.SetHealth ();
+
+    }
 
     protected override void Update () {
 
@@ -87,6 +110,12 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
     public void EndAttack () {
 
         currentAttack.State = AttackState.Cooldown;
+
+    }
+
+    void OnDestroy () {
+
+        SC_GameManager.GM.Fail ();
 
     }
 

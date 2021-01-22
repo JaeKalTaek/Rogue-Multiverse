@@ -215,6 +215,63 @@ Transform:
   m_Father: {fileID: 5709983294361822556}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3137016532004078060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4128887949054872979}
+  - component: {fileID: 3239770227769848648}
+  m_Layer: 13
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4128887949054872979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3137016532004078060}
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.018, y: 0.462, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5709983294361822556}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &3239770227769848648
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3137016532004078060}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0054129213, y: 0.123066574}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.21845463, y: 0.5944912}
+  m_EdgeRadius: 0
 --- !u!1 &4036201130819505469
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,6 +763,7 @@ Transform:
   - {fileID: 9134207191868846249}
   - {fileID: 359200280624781049}
   - {fileID: 3077544829861162983}
+  - {fileID: 4128887949054872979}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -785,14 +843,17 @@ MonoBehaviour:
     collider: {fileID: 7684613307485031261}
     damage: 10
     speed: 2
+    cooldown: 0
   simpleKick:
     collider: {fileID: 4524321708970977344}
     damage: 15
     speed: 1.5
+    cooldown: 0
   comboPunch:
     collider: {fileID: 7684613307485031261}
     damage: 30
     speed: 1.5
+    cooldown: 0
   comboTime: 1
   comboHitsNeeded: 2
 --- !u!61 &3312858064699279023
