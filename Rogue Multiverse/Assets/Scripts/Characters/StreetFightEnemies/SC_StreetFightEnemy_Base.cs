@@ -39,6 +39,9 @@ public class SC_StreetFightEnemy_Base : SC_BaseCharacter {
 
                     e.transform.position += movement.V3 ();
 
+                    if (movement.x != 0)
+                        e.spriteR.flipX = movement.x < 0;
+
                 } else if (c.GetComponentInParent<SC_BasePlayerCharacter> ()) {
 
                     e.currentAttack = StartAttack (e.gameObject, "simplePunch");

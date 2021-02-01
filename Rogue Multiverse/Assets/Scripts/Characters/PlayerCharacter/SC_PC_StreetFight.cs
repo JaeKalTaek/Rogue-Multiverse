@@ -67,7 +67,10 @@ public class SC_PC_StreetFight : SC_BasePlayerCharacter {
 
         base.Update ();
 
-        animator.SetBool ("Walking", Vector3.Distance (prevPos, transform.position) > 0);        
+        animator.SetBool ("Walking", Vector3.Distance (prevPos, transform.position) > 0);
+
+        if ((transform.position - prevPos).x != 0)
+            spriteR.flipX = (transform.position - prevPos).x < 0;
 
         if (!Paused && !currentAttack) {
 
