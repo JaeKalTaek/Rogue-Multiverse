@@ -67,7 +67,7 @@ public class SC_GM_StreetFight : SC_GameManager {
 
     public static Collider2D MovementCheck (SC_BaseCharacter c, Vector2 movement) {
 
-        RaycastHit2D[] charas = Physics2D.BoxCastAll (c.ColliderPos, c.Collider.bounds.size, 0, movement, movement.magnitude, LayerMask.GetMask (new string[] { "Enemy", "Player" }));
+        RaycastHit2D[] charas = Physics2D.BoxCastAll (c.ColliderPos.V2() + movement, c.Collider.bounds.size, 0, movement, movement.magnitude, LayerMask.GetMask (new string[] { "Enemy", "Player" }));
 
         Collider2D charaHit = null;
 
